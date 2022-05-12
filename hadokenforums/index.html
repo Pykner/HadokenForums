@@ -1,20 +1,13 @@
-<?php
-session_start(); 
-?>
 <html>
     <head>
         <title>Home</title>
-        <link rel="stylesheet" href="css/homestyle.css?t=<?php echo round(microtime(true)*1000);?>">
+        <link rel="stylesheet" href="css/homestyle.css">
     </head>
 
     <body>
-        
-    <script src="js/playsound.js"></script>
+
     <div class="header">
-
-        <audio id="audio" src="sound/hadoken.mp3"></audio>   
-        <img id="img" src="img/hadokenlogo.png" value="PLAY"  onclick="play()">
-
+        <h1>Header</h1>
     </div>
 
     <nav class="navbar">
@@ -52,16 +45,6 @@ session_start();
                 </div>
             </li>
             
-            <?php
-
-            if(isset($_SESSION["username"])){
-                ?><li style="float:right"><a href=""><?php echo $_SESSION["username"]?></a>
-            <?php
-            }else{
-                ?><li style="float:right"><a href="">login</a>
-                <?php
-            }
-            ?>
         </ul>
     </nav>
     
