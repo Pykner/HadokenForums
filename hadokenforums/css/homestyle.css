@@ -1,5 +1,6 @@
 body{
   background-color: rgb(24, 23, 23);
+
 }
 
 /*Header code*/
@@ -22,6 +23,8 @@ ul {
         position: -webkit-sticky;
         text-align: center;
         top: 0;
+        margin-left: 2%;
+        margin-right: 2%;
       }
 
     li {
@@ -80,7 +83,50 @@ ul {
     border-radius: 25px;
   }
 
-   
+/*what is new menu code*/
+.whatisnew{
+  margin-left: 2%;
+  margin-right: 30%;
+  margin-top: 20px;
+  margin-bottom: 0px;
+}
+
+h3{
+  color: white;
+}
+
+.whatisnewtxt{
+  margin-left: 2%;
+  margin-right: 30%;
+  margin-top: 0px;
+  margin-bottom: 20px;
+  padding: 0 18px;
+  display: none;
+  overflow: hidden;
+  background-color: #d9d9d9;
+    
+}
+
+.tabcollapse {
+  background-color: #333;
+  color: white;
+  cursor: pointer;
+  padding: 18px;
+  width: 100%;
+  border: none;
+  text-align: left;
+  outline: none;
+  font-size: 15px;
+}
+
+.active, .tabcollapse:hover {
+  background-color: red;
+}
+
+.tabs{
+  color: rgba(243, 182, 13, 0.911);
+}
+
 
 /*Footer code*/
 .footer {

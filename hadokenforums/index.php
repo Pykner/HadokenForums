@@ -76,6 +76,33 @@ session_start();
         
         <p>You can view all content here without an account but if you're interested in joining the community consider <a href="">creating an account!</a></p> 
     </div>
+    
+    <div class="whatisnew">
+        <h3>What's new</h3>
+        <ul>
+            <li><button type="button" class="tabcollapse">Website updates</button></li>
+                <div class="whatisnewtxt">
+                    <h2>13/05/2022 update</h2>
+                    <p>Added what is new text</p>
+                    <p>Added what is new navbar</p>
+                    <p>Fixed layout</p>
+                    <p>Added sex</p>
+                </div>
+            <li><button type="button" class="tabcollapse">Articles</button></li>
+                <div class="whatisnewtxt">
+                        <h2>A</h2>
+                        <p>AAAA text</p>
+                        <p>Added AAAAA</p>
+                        <p>Fixed AAAA</p>
+                        <p>Added sex</p>
+                    </div>
+
+            <li><a href="">Events</a></li>
+            <li><a href="">New resources</a></li>
+        </ul> 
+    </div>
+    
+    <script src="js/collapse.js"></script>
 
     <div class="footer">
         <p>Footer</p>
