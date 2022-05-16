@@ -101,10 +101,9 @@ h3{
   margin-top: 0px;
   margin-bottom: 20px;
   padding: 0 18px;
-  display: none;
   overflow: hidden;
   background-color: #d9d9d9;
-    
+
 }
 
 .tabcollapse {
@@ -123,14 +122,50 @@ h3{
   background-color: red;
 }
 
-.tabs{
-  color: rgba(243, 182, 13, 0.911);
+/*Latest posts code*/
+.ltstpost{
+margin-left: 2%;
+  margin-right: 30%;
+  margin-top: 0px;
+  margin-bottom: 20px;
+  padding: 0 18px;
+  overflow: hidden;
+  background-color: #d9d9d9;
 }
 
 
 /*Footer code*/
 .footer {
-    background-color: #f1f1f1;
+
     padding: 10px;
     text-align: center;
+    margin-left: 0%;
+    margin-right: 0%;
+    
+    color: white;
+  }
+
+.about{
+  float: left;
+  border-width: 1px;
+  border-top: white;
+  border-right: white;
+  width: 26%;
+}
+
+.stats{
+  float: left;
+  border-width: 1px;
+  border-top: white;
+  border-right: white;
+  border-left: white;
+  width: 36%;
+}
+
+.share{
+  float: left;
+  border-width: 1px;
+  border-top: white;
+  border-left: white;
+  width: 38%;
 }

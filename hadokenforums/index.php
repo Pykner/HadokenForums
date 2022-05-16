@@ -5,6 +5,7 @@ session_start();
     <head>
         <title>Home</title>
         <link rel="stylesheet" href="css/homestyle.css?t=<?php echo round(microtime(true)*1000);?>">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     </head>
 
     <body>
@@ -19,16 +20,16 @@ session_start();
 
     <nav class="navbar">
         <ul>
-            <li><a href="index.php">Home</a></li>
+            <li><a href="index.php"><i class="fa fa-fw fa-home"></i>Home</a></li>
             <li class="dropdown">
-                <a href="javascript:void(0)" class="dropbtn">Forums</a>
+                <a href="javascript:void(0)" class="dropbtn"><i class="fa fa-wheelchair-alt"></i>Forums</a>
                 <div class="dropdown-content">
                     <a href="#">See posts</a>
                     <a href="#">Create post</a>
                 </div>
             </li>
             <li class="dropdown">
-                <a href="javascript:void(0)" class="dropbtn">Tournaments</a>
+                <a href="javascript:void(0)" class="dropbtn"><i class="fa fa-shower" ></i>Tournaments</a>
                 <div class="dropdown-content">
                     <a href="#">Majors</a>
                     <a href="#">See tournaments</a>
@@ -37,14 +38,14 @@ session_start();
                 </div>
             </li>
             <li class="dropdown">
-                <a href="javascript:void(0)" class="dropbtn">Resources</a>
+                <a href="javascript:void(0)" class="dropbtn"><i class="fa fa-book"></i>Resources</a>
                 <div class="dropdown-content">
                     <a href="#">See resources</a>
                     <a href="#">Submit resource</a>
                 </div>
             </li>
             <li class="dropdown">
-                <a href="javascript:void(0)" class="dropbtn">Matchmaking</a>
+                <a href="javascript:void(0)" class="dropbtn"><i class="fa fa-gamepad"></i>Matchmaking</a>
                 <div class="dropdown-content">
                     <a href="#">See matchmaking</a>
                     <a href="#">Create matchmaking</a>
@@ -55,10 +56,10 @@ session_start();
             <?php
 
             if(isset($_SESSION["username"])){
-                ?><li style="float:right"><a href=""><?php echo $_SESSION["username"]?></a>
+                ?><li style="float:right"><a href=""><i class="fa fa-user"></i><?php echo $_SESSION["username"]?></a>
             <?php
             }else{
-                ?><li style="float:right"><a href="">login</a>
+                ?><li style="float:right"><a href=""><i class="fa fa-user"></i>login</a>
                 <?php
             }
             ?>
@@ -80,32 +81,43 @@ session_start();
     <div class="whatisnew">
         <h3>What's new</h3>
         <ul>
-            <li><button type="button" class="tabcollapse">Website updates</button></li>
-                <div class="whatisnewtxt">
+            <li><a href="">Website updates</a></li>
+            <li><a href="">Articles</a></li>
+            <li><a href="">Events</a></li>
+            <li><a href="">New resources</a></li>
+        </ul> 
+    </div>
+    <div class="whatisnewtxt">
+        <?php /*this shit's gonna get replaced by a query*/
+        ?>
                     <h2>13/05/2022 update</h2>
                     <p>Added what is new text</p>
                     <p>Added what is new navbar</p>
                     <p>Fixed layout</p>
                     <p>Added sex</p>
                 </div>
-            <li><button type="button" class="tabcollapse">Articles</button></li>
-                <div class="whatisnewtxt">
-                        <h2>A</h2>
-                        <p>AAAA text</p>
-                        <p>Added AAAAA</p>
-                        <p>Fixed AAAA</p>
-                        <p>Added sex</p>
-                    </div>
 
-            <li><a href="">Events</a></li>
-            <li><a href="">New resources</a></li>
-        </ul> 
+
+    <div class="ltstpost">
+            <H2>THIS IS WHERE THE LATEST POSTS GO</H2>
     </div>
-    
-    <script src="js/collapse.js"></script>
 
     <div class="footer">
-        <p>Footer</p>
+        <div class="about">
+            <H3>About</H3><br>
+            <a href="">Contact</a><br>
+            <a href="">Creator</a>
+        </div>
+        <div class="stats">
+            <H3>Forum stats</H3>
+            <p>member number query</p>
+            <p>post number query</p>
+        </div>
+
+        <div class="share">
+            <H3>Share this page</H3>
+
+        </div>       
     </div>
 
     </body>
