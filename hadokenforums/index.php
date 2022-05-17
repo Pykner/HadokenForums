@@ -65,7 +65,7 @@ session_start();
             ?>
         </ul>
     </nav>
-    
+    <div class="bodyinner">
     <div class="welcome_text">
     <h2>Welcome to the hadoken forums</h2>
         <p>Hadoken forums is a community designed to: </p>
@@ -95,30 +95,37 @@ session_start();
                     <p>Added what is new navbar</p>
                     <p>Fixed layout</p>
                     <p>Added sex</p>
-                </div>
+    </div>
 
+            
 
     <div class="ltstpost">
+            <h3>Latest forum posts</h3>
             <H2>THIS IS WHERE THE LATEST POSTS GO</H2>
     </div>
 
     <div class="footer">
         <div class="about">
-            <H3>About</H3><br>
+            <H3>About</H3>
             <a href="">Contact</a><br>
             <a href="">Creator</a>
         </div>
+
         <div class="stats">
             <H3>Forum stats</H3>
             <p>member number query</p>
             <p>post number query</p>
         </div>
-
+            
         <div class="share">
             <H3>Share this page</H3>
-
-        </div>       
+            <div class="icon-bar">
+                <a href="https://www.facebook.com" class="facebook"><i class="fa fa-facebook"></i></a> 
+                <a href="https://twitter.com" class="twitter"><i class="fa fa-twitter"></i></a> 
+                <a href="https://www.youtube.com" class="youtube"><i class="fa fa-youtube"></i></a> 
+            </div>
+        </div>    
     </div>
-
+    </div>
     </body>
 </html>

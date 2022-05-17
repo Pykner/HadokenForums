@@ -1,12 +1,23 @@
 body{
-  background-color: rgb(24, 23, 23);
+  
+  background-image: url("../img/Dojo.jpg");
+  Background-color: #0C1613;
+  background-repeat: no-repeat;
+}
 
+.bodyinner{
+  background-color: #171717;
+  margin-left: 2%;
+  margin-right: 2%;
+  padding-top: 4px;
 }
 
 /*Header code*/
 .header {
-    padding: 0px;
+    
     text-align: center;
+  
+    background-size: 100% 100%;
     }
 
 /*dropdown navigation tab code*/
@@ -76,11 +87,16 @@ ul {
     width: 50%;
     margin-left: auto;
     margin-right: auto;
-    margin-top: 5px;
+    margin-top: 15px;
     margin-bottom: 5px;
     padding: 5px;
-    background-color: #d9d9d9;
+    background-color: #302c2c;
+    color: white;
     border-radius: 25px;
+  }
+
+  .welcome_text a {
+    color: #F8B552;
   }
 
 /*what is new menu code*/
@@ -89,6 +105,10 @@ ul {
   margin-right: 30%;
   margin-top: 20px;
   margin-bottom: 0px;
+}
+
+.whatisnew ul{
+  background-color: #282424;
 }
 
 h3{
@@ -102,70 +122,74 @@ h3{
   margin-bottom: 20px;
   padding: 0 18px;
   overflow: hidden;
-  background-color: #d9d9d9;
-
-}
-
-.tabcollapse {
-  background-color: #333;
+  background-color: #302c2c;
   color: white;
-  cursor: pointer;
-  padding: 18px;
-  width: 100%;
-  border: none;
-  text-align: left;
-  outline: none;
-  font-size: 15px;
-}
-
-.active, .tabcollapse:hover {
-  background-color: red;
 }
 
 /*Latest posts code*/
 .ltstpost{
-margin-left: 2%;
+margin-left: 1%;
   margin-right: 30%;
   margin-top: 0px;
   margin-bottom: 20px;
   padding: 0 18px;
   overflow: hidden;
-  background-color: #d9d9d9;
 }
 
 
 /*Footer code*/
 .footer {
-
-    padding: 10px;
+    background-color: #0c0c0c;
+    
     text-align: center;
     margin-left: 0%;
     margin-right: 0%;
     
-    color: white;
+    color: #F8B552;
+  }
+
+  .footer a{
+    color: #F8B552;
   }
 
 .about{
   float: left;
-  border-width: 1px;
-  border-top: white;
-  border-right: white;
   width: 26%;
 }
 
 .stats{
   float: left;
-  border-width: 1px;
-  border-top: white;
-  border-right: white;
-  border-left: white;
   width: 36%;
 }
 
 .share{
   float: left;
-  border-width: 1px;
-  border-top: white;
-  border-left: white;
   width: 38%;
+}
+
+.youtube {
+  background: #bb0000;
+  color: white;
+}
+
+.facebook {
+  background: #3B5998;
+  color: white;
+}
+
+.twitter {
+  background: #55ACEE;
+  color: white;
+}
+
+.icon-bar a {
+  text-align: center;
+  padding: 10px;
+  transition: all 0.3s ease;
+  color: white;
+  font-size: 20px;
+}
+
+.icon-bar a:hover {
+  background-color: #000;
 }
