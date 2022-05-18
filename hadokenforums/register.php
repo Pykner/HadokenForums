@@ -1,34 +1,17 @@
 <?php
 session_start(); 
 ?>
+
 <html>
-    <head>
-        <title>HadokenForums - Home</title>
-        <link rel = "icon" href = "img/icon.jpg" type = "image/x-icon">
+	<head>
+		<title>HadokenForums - register</title>
+		<link rel = "icon" href = "img/icon.jpg" type = "image/x-icon">
         <link rel="stylesheet" href="css/homestyle.css?t=<?php echo round(microtime(true)*1000);?>">
+		<link rel="stylesheet" href="css/registerform.css?t=<?php echo round(microtime(true)*1000);?>">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    </head>
-
-    <body>
-
-    <?php
-			/*instauro la connessione al database */
-			include("config.php");  //file di config con i parametri di connessione
-				$mydb = new mysqli(SERVER, UTENTE, PASSWORD, DATABASE);
-				if ($mydb->connect_errno) {
-					echo "Errore nella connessione a MySQL: (" . $mydb->connect_errno . ") " . $mydb->connect_error;
-					exit();  //termina la pagina
-				}
-				//query per prelevare l'elenco delle nazionalita
-				$query1 = "SELECT COUNT(Accountid) AS num_account FROM account";
-				//eseguo la query
-				$risultato1 = $mydb->query($query1);
-			?>
-
-
-
-        
-    <script src="js/playsound.js"></script>
+	</head>
+	<body>
+	<script src="js/playsound.js"></script>
     <div class="header">
 
         <audio id="audio" src="sound/hadoken.mp3"></audio>   
@@ -74,7 +57,7 @@ session_start();
             <?php
 
             if(isset($_SESSION["username"])){
-                ?><li style="float:right"><a href="account.php"><i class="fa fa-user"></i><?php echo $_SESSION["username"]?></a>
+                ?><li style="float:right"><a href=""><i class="fa fa-user"></i><?php echo $_SESSION["username"]?></a>
             <?php
             }else{
                 ?><li style="float:right"><a onclick="document.getElementById('id01').style.display='block'" style="width:auto;"><i class="fa fa-user"></i>login</a>
@@ -120,48 +103,52 @@ session_start();
 
     <script src="js/modal.js"></script>
 
-    <div class="bodyinner">
-    <div class="welcome_text">
-    <h2>Welcome to the hadoken forums</h2>
-        <p>Hadoken forums is a community designed to: </p>
+	<div class="bodyinner">
 
-            <li>discuss fighting games</li><br>
-            <li>keep up with, create and publicize tournaments</li><br>
-            <li>find gameplay resources for your favorite games</li><br>
-            <li>find matches with other players</li><br>
-        
-        <p>You can view all content here without an account but if you're interested in joining the community consider <a href="register.php">creating an account!</a></p> 
-    </div>
-    
-    <div class="whatisnew">
-        <h3>What's new</h3>
-        <ul>
-            <li><a href="">Website updates</a></li>
-            <li><a href="">Articles</a></li>
-            <li><a href="">Events</a></li>
-            <li><a href="">New resources</a></li>
-        </ul> 
-    </div>
-    <div class="whatisnewtxt">
-        <?php /*this shit's gonna get replaced by a query*/
-        ?>
-                    <h2>13/05/2022 update</h2>
-                    <p>Added what is new text</p>
-                    <p>Added what is new navbar</p>
-                    <p>Fixed layout</p>
-                    <p>Added sex</p>
-    </div>
+		<div class="welcome_text">
+		<h2>Welcome to the hadoken forums</h2>
+			<p>Hadoken forums is a community designed to: </p>
 
-            
+				<li>discuss fighting games</li><br>
+				<li>keep up with, create and publicize tournaments</li><br>
+				<li>find gameplay resources for your favorite games</li><br>
+				<li>find matches with other players</li><br>
+			
+			<p>You can view all content here without an account but if you're interested in joining the community consider <a href="register.php">creating an account!</a></p> 
+		</div>
+		
+		<div class="registerform">
+		<h3>Register Form</h3>
+			<form id="signin" name="signin" method="post" action="signin.script.php">
+				
+			<div class="input-container">
+				<i class="fa fa-user icon"></i>
+				<input class="input-field" type="text" placeholder="Insert username" name="usr" required>
+			</div>
 
-    <div class="ltstpost">
-            <h3>Latest forum posts</h3>
-            <H2>THIS IS WHERE THE LATEST POSTS GO</H2>
-    </div>
+			<div class="input-container">
+				<i class="fa fa-envelope icon"></i>
+				<input class="input-field" type="text" placeholder="Insert email" name="email" required>
+			</div>
 
-    </div>
+			<div class="input-container">
+				<i class="fa fa-key icon"></i>
+				<input class="input-field" type="password" placeholder="Insert password" name="pwd" required>
+			</div>
 
-    <div class="footer">
+				<input class="btn" type="submit" name="submit" value="signin">
+			</form>
+			<?php
+			//comunico anche l'eventuale tentativo errato di register
+			if(isset($_SESSION["errore_register"]) && $_SESSION["errore_register"]==true){
+				echo "<p>Nome utente già in utilizzo</p>";
+				unset($_SESSION["errore_login"]);
+			}
+		?>
+		</div>
+	</div>
+
+	<div class="footer">
         <div class="about">
             <H3>About</H3>
             <a href="">Contact</a><br>
@@ -170,11 +157,7 @@ session_start();
 
         <div class="stats">
             <H3>Forum stats</H3>
-            <?php
-				while($row=$risultato1->fetch_assoc()){
-					echo '<p>There are '.$row["num_account"].' registered members!</p>';
-				}
-			?>
+            <p>member number query</p>
             <p>post number query</p>
         </div>
             
@@ -187,6 +170,5 @@ session_start();
             </div>
         </div>    
     </div>
-    
-    </body>
+	</body>
 </html>

@@ -1,0 +1,1 @@
+<a href="logout.script.php"> temp </a>
