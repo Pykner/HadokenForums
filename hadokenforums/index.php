@@ -118,8 +118,6 @@ session_start();
         </form>
     </div>
 
-    <script src="js/modal.js"></script>
-
     <div class="bodyinner">
     <div class="welcome_text">
     <h2>Welcome to the hadoken forums</h2>

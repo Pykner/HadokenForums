@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.4
+-- version 5.1.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Creato il: Mag 17, 2022 alle 11:30
--- Versione del server: 10.4.17-MariaDB
--- Versione PHP: 7.3.26
+-- Creato il: Mag 19, 2022 alle 23:29
+-- Versione del server: 10.4.22-MariaDB
+-- Versione PHP: 8.1.2
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -31,8 +31,20 @@ CREATE TABLE `account` (
   `Accountid` int(11) NOT NULL,
   `user` varchar(20) DEFAULT NULL,
   `hash` varchar(255) DEFAULT NULL,
-  `stat` varchar(2000) DEFAULT NULL
+  `stat` varchar(2000) DEFAULT NULL,
+  `email` varchar(100) DEFAULT NULL,
+  `pic` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dump dei dati per la tabella `account`
+--
+
+INSERT INTO `account` (`Accountid`, `user`, `hash`, `stat`, `email`, `pic`) VALUES
+(1, 'Pykner', '$2y$10$fHcbP6AGEMTWRqaupaxg8.NRSOZ8OUlFQ5xbG8Fu7dnWmDAuPBlwS', 'Hello! i am an hadoken forums user.', 'emasonic2@gmail.com', 'img/profile/profilepic1.jpg'),
+(2, 'gamering69420', '$2y$10$UPBR8brRLIM.ugixYSQ4K.TmuY52FPZJNV/UwsebIfS5kFbfIjkXW', 'Hello! i am an hadoken forums user.', 'gamering69420@gmail.com', 'img/profile/profilepic1.jpg'),
+(3, 'Ky_main', '$2y$10$.hfO1RHqnarFNDi7rG2LheiMD3n2H0B9JyvRZZHhJxI2/yamPNngm', 'Hello! i am an hadoken forums user.', 'runupgrab@gmail.com', 'img/profile/profilepic1.jpg'),
+(4, 'Baiken_main', '$2y$10$.QWG.NZOoFrgsd7yEPMwZege93x4A6xgRMrgEj6w.s6VJUx2YVuWy', 'Hello! i am an hadoken forums user.', 'booba@booba.com', 'img/profile/profilepic2.jpg');
 
 -- --------------------------------------------------------
 
@@ -182,7 +194,7 @@ ALTER TABLE `webupdate`
 -- AUTO_INCREMENT per la tabella `account`
 --
 ALTER TABLE `account`
-  MODIFY `Accountid` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `Accountid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT per la tabella `matchmaking`

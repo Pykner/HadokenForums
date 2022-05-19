@@ -1,0 +1,32 @@
+.accountdetails{
+    margin-left: 40px;
+    margin-right: 40px;
+    margin-top: 2%;
+    background-color: #302c2c;
+    padding: 10px;
+}
+
+.viewing{
+  float: left;
+  margin-left: 20px;  
+}
+
+.viewing h1{
+color: #F8B552;
+}
+
+.profilepic{
+    float: left;
+}
+
+.email{
+    color: #d9d9d9;
+}
+
+
+#prf{
+    max-width: 196px;
+    max-height: 196px;
+    min-height: 196px;
+    min-width: 196px;
+}
