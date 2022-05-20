@@ -13,7 +13,7 @@ session_start();
 
     <?php
 			/*instauro la connessione al database */
-			include("config.php");  //file di config con i parametri di connessione
+			include("scripts/config.php");  //file di config con i parametri di connessione
 				$mydb = new mysqli(SERVER, UTENTE, PASSWORD, DATABASE);
 				if ($mydb->connect_errno) {
 					echo "Errore nella connessione a MySQL: (" . $mydb->connect_errno . ") " . $mydb->connect_error;
@@ -58,7 +58,7 @@ session_start();
             <li class="dropdown">
                 <a href="javascript:void(0)" class="dropbtn"><i class="fa fa-book"></i>Resources</a>
                 <div class="dropdown-content">
-                    <a href="#">See resources</a>
+                    <a href="resourceindex.php">See resources</a>
                     <a href="#">Submit resource</a>
                 </div>
             </li>
@@ -86,7 +86,7 @@ session_start();
 
     <div id="id01" class="modal">
   
-        <form class="modal-content animate" id="login" name="login" method="post" action="login.script.php">
+        <form class="modal-content animate" id="login" name="login" method="post" action="scripts/login.script.php">
  
       <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
 

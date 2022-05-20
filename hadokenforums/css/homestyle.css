@@ -1,6 +1,6 @@
 body{
-  
-  background-image: url("../img/Dojo.jpg"), linear-gradient(#0C1613,#030504);
+  margin: 0;
+  background-image: linear-gradient(#0C1613,#030504);
   background-size: 100%;
   background-repeat: no-repeat;
   background-position: top;
@@ -16,8 +16,13 @@ body{
 
 /*Header code*/
 .header {
-    margin-bottom: 9px;
+  margin: 0;
     text-align: center;
+    background-image: url("../img/Dojo.jpg");
+  background-size: 100% 100% ;
+
+  background-repeat: no-repeat;
+  
     }
 
 /*dropdown navigation tab code*/

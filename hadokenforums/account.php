@@ -14,7 +14,7 @@ session_start();
 
     <?php
 			/*instauro la connessione al database */
-			include("config.php");  //file di config con i parametri di connessione
+			include("scripts/config.php");  //file di config con i parametri di connessione
 				$mydb = new mysqli(SERVER, UTENTE, PASSWORD, DATABASE);
 				if ($mydb->connect_errno) {
 					echo "Errore nella connessione a MySQL: (" . $mydb->connect_errno . ") " . $mydb->connect_error;
@@ -63,7 +63,7 @@ session_start();
             <li class="dropdown">
                 <a href="javascript:void(0)" class="dropbtn"><i class="fa fa-book"></i>Resources</a>
                 <div class="dropdown-content">
-                    <a href="#">See resources</a>
+                    <a href="resourceindex.php">See resources</a>
                     <a href="#">Submit resource</a>
                 </div>
             </li>
@@ -91,7 +91,7 @@ session_start();
 
     <div id="id01" class="modal">
   
-        <form class="modal-content animate" id="login" name="login" method="post" action="login.script.php">
+        <form class="modal-content animate" id="login" name="login" method="post" action="scripts/login.script.php">
  
       <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
 
@@ -140,9 +140,46 @@ session_start();
             <div class="email">
                 <p>email: <?php echo ($row['email']);  ?></p>
             </div>
-            <a href="logout.script.php"> temp </a>
+
+            <div class="status">
+                <p><?php echo ($row['stat']); ?></p>
+            </div>
+
             </div>
             <div style="clear:both;"></div>
+
+            <h1>Latest from this user:</h1>
+
+            <div class="tabs">
+                <button class="tablink" onclick="openTab('posts', this, '#F8B552')" id="defaultOpen">Posts</button>
+                <button class="tablink" onclick="openTab('resources', this, '#F8B552')">Resources</button>
+                <button class="tablink" onclick="openTab('tournaments', this, '#F8B552')">Tournaments</button>
+                <button class="tablink" onclick="openTab('matchmaking', this, '#F8B552')">Matchmaking</button>
+            </div>
+
+                <div id="posts" class="tabcontent">
+                <h1>London</h1>
+                <p>England is my city.</p>
+                </div>
+
+                <div id="resources" class="tabcontent">
+                <h1>Paris</h1>
+                <p>Paris is the capital of France.</p> 
+                </div>
+
+                <div id="tournaments" class="tabcontent">
+                <h1>Tokyo</h1>
+                <p>Tokyo is the capital of Japan.</p>
+                </div>
+
+                <div id="matchmaking" class="tabcontent">
+                <h1>Oslo</h1>
+                <p>Oslo is the capital of Norway.</p>
+                </div>
+
+                <script src="js/tabheader.js"></script>
+
+            <button class="btn"> <a id="out" href="scripts/logout.script.php">Log out </a></button>
         </div>
 
         <?php }}?>

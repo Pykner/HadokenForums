@@ -9,6 +9,10 @@
   .registerform label{
     color: white;
   }
+  
+  .registerform p{
+    color: red;
+  }
 
   .input-container {
     display: -ms-flexbox; /* IE10 */

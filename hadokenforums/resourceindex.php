@@ -1,16 +1,16 @@
 <?php
 session_start(); 
 ?>
-
 <html>
-	<head>
-		<title>HadokenForums - register</title>
-		<link rel = "icon" href = "img/icon.jpg" type = "image/x-icon">
+    <head>
+        <title>HadokenForums - Home</title>
+        <link rel = "icon" href = "img/icon.jpg" type = "image/x-icon">
         <link rel="stylesheet" href="css/homestyle.css?t=<?php echo round(microtime(true)*1000);?>">
-		<link rel="stylesheet" href="css/registerform.css?t=<?php echo round(microtime(true)*1000);?>">
+        <link rel="stylesheet" href="css/resources.css?t=<?php echo round(microtime(true)*1000);?>">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-	</head>
-	<body>
+    </head>
+
+    <body>
 
     <?php
 			/*instauro la connessione al database */
@@ -26,7 +26,10 @@ session_start();
 				$risultato1 = $mydb->query($query1);
 			?>
 
-	<script src="js/playsound.js"></script>
+
+
+        
+    <script src="js/playsound.js"></script>
     <div class="header">
 
         <audio id="audio" src="sound/hadoken.mp3"></audio>   
@@ -116,54 +119,29 @@ session_start();
         </form>
     </div>
 
-    <script src="js/modal.js"></script>
+    <div class="bodyinner">
+        <h1>Supported games:</h1>
+        <div class="games">
 
-	<div class="bodyinner">
+            <div class="GGST">
+            <a href="index.php"><img id="GGST" src="img/logos/GGStrivelogo.png"></a>
+            </div>
 
-		<div class="welcome_text">
-		<h2>Welcome to the hadoken forums</h2>
-			<p>Hadoken forums is a community designed to: </p>
+            <div class="SFV">
+            <a href="index.php"><img id="SFV" src="img/logos/SFVlogo.png"></a>
+            </div>
 
-				<li>discuss fighting games</li><br>
-				<li>keep up with, create and publicize tournaments</li><br>
-				<li>find gameplay resources for your favorite games</li><br>
-				<li>find matches with other players</li><br>
-			
-			<p>You can view all content here without an account but if you're interested in joining the community consider <a href="register.php">creating an account!</a></p> 
-		</div>
-		
-		<div class="registerform">
-		<h3>Register Form</h3>
-			<form id="signin" name="signin" method="post" action="scripts/signin.script.php">
-				
-			<div class="input-container">
-				<i class="fa fa-user icon"></i>
-				<input class="input-field" type="text" placeholder="Insert username" name="usr" required>
-			</div>
+            <div style="clear:both;"></div>
 
-			<div class="input-container">
-				<i class="fa fa-envelope icon"></i>
-				<input class="input-field" type="text" placeholder="Insert email" name="email" required>
-			</div>
+            <div class="T7">
+            <a href="index.php"><img id="T7" src="img/logos/T7logo.png"></a>
+            </div>
+            
+            
+        </div>
+    </div>
 
-			<div class="input-container">
-				<i class="fa fa-key icon"></i>
-				<input class="input-field" type="password" placeholder="Insert password" name="pwd" required>
-			</div>
-
-				<input class="btn" type="submit" name="submit" value="signin">
-			</form>
-			<?php
-			//comunico anche l'eventuale tentativo errato di register
-			if(isset($_SESSION["errore_register"]) && $_SESSION["errore_register"]==true){
-				echo "<p>Nome utente già in utilizzo</p>";
-				unset($_SESSION["errore_login"]);
-			}
-		?>
-		</div>
-	</div>
-
-	<div class="footer">
+    <div class="footer">
         <div class="about">
             <H3>About</H3>
             <a href="">Contact</a><br>
@@ -189,5 +167,6 @@ session_start();
             </div>
         </div>    
     </div>
-	</body>
+    
+    </body>
 </html>
