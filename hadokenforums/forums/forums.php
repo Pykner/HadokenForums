@@ -1,20 +1,20 @@
 <?php
 session_start(); 
 ?>
-
 <html>
-	<head>
-		<title>HadokenForums - register</title>
-		<link rel = "icon" href = "img/icon.jpg" type = "image/x-icon">
-        <link rel="stylesheet" href="css/homestyle.css?t=<?php echo round(microtime(true)*1000);?>">
-		<link rel="stylesheet" href="css/registerform.css?t=<?php echo round(microtime(true)*1000);?>">
+    <head>
+        <title>HadokenForums - Home</title>
+        <link rel = "icon" href = "../img/icon.jpg" type = "image/x-icon">
+        <link rel="stylesheet" href="../css/homestyle.css?t=<?php echo round(microtime(true)*1000);?>">
+        <link rel="stylesheet" href="../css/forums.css?t=<?php echo round(microtime(true)*1000);?>">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-	</head>
-	<body>
+    </head>
+
+    <body>
 
     <?php
 			/*instauro la connessione al database */
-			include("scripts/config.php");  //file di config con i parametri di connessione
+			include("../scripts/config.php");  //file di config con i parametri di connessione
 				$mydb = new mysqli(SERVER, UTENTE, PASSWORD, DATABASE);
 				if ($mydb->connect_errno) {
 					echo "Errore nella connessione a MySQL: (" . $mydb->connect_errno . ") " . $mydb->connect_error;
@@ -24,20 +24,28 @@ session_start();
 				$query1 = "SELECT COUNT(Accountid) AS num_account FROM account";
 				//eseguo la query
 				$risultato1 = $mydb->query($query1);
+
+                $query2 = "SELECT Categoryid, title, description FROM category";
+ 
+                $risultato2 = $mydb->query($query2);
 			?>
 
-	<script src="js/playsound.js"></script>
+
+
+        
+    <script src="../js/playsound.js"></script>
     <div class="header">
 
-        <audio id="audio" src="sound/hadoken.mp3"></audio>   
-        <img id="img" src="img/hadokenlogo.png" value="PLAY"  onclick="play()">
+        <audio id="audio" src="../sound/hadoken.mp3"></audio>   
+        <img id="img" src="../img/hadokenlogo.png" value="PLAY"  onclick="play()">
 
     </div>
 
     <nav class="navbar">
         <ul>
-            <li><a href="index.php"><i class="fa fa-fw fa-home"></i>Home</a></li>
-            <li><a href="forums/forums.php"><i class="fa fa-commenting-o"></i>Forums</a></li>
+            <li><a href="../index.php"><i class="fa fa-fw fa-home"></i>Home</a></li>
+            <li><a href="forums.php"><i class="fa fa-commenting-o"></i>Forums</a></li>
+
             <li class="dropdown">
                 <a href="javascript:void(0)" class="dropbtn"><i class="fa fa-trophy" ></i>Tournaments</a>
                 <div class="dropdown-content">
@@ -50,7 +58,7 @@ session_start();
             <li class="dropdown">
                 <a href="javascript:void(0)" class="dropbtn"><i class="fa fa-book"></i>Resources</a>
                 <div class="dropdown-content">
-                    <a href="resources/resourceindex.php">See resources</a>
+                    <a href="../resources/resourceindex.php">See resources</a>
                     <a href="#">Submit resource</a>
                 </div>
             </li>
@@ -66,7 +74,7 @@ session_start();
             <?php
 
             if(isset($_SESSION["username"])){
-                ?><li style="float:right"><a href="account.php"><i class="fa fa-user"></i><?php echo $_SESSION["username"]?></a>
+                ?><li style="float:right"><a href="../account.php"><i class="fa fa-user"></i><?php echo $_SESSION["username"]?></a>
             <?php
             }else{
                 ?><li style="float:right"><a onclick="document.getElementById('id01').style.display='block'" style="width:auto;"><i class="fa fa-user"></i>login</a>
@@ -78,7 +86,7 @@ session_start();
 
     <div id="id01" class="modal">
   
-        <form class="modal-content animate" id="login" name="login" method="post" action="scripts/login.script.php">
+        <form class="modal-content animate" id="login" name="login" method="post" action="../scripts/login.script.php">
  
       <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
 
@@ -96,7 +104,7 @@ session_start();
 
     <div class="container" style="background-color:#333">
       <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancel</button>
-      <span class="psw">Don't have an account? <a href="register.php">register</a></span>
+      <span class="psw">Don't have an account? <a href="../register.php">register</a></span>
 
       <?php
 			//comunico anche l'eventuale tentativo errato di login
@@ -110,54 +118,60 @@ session_start();
         </form>
     </div>
 
-    <script src="js/modal.js"></script>
+    <div class="bodyinner">
 
-	<div class="bodyinner">
+        <div class="welcome_text">
+        <h2>Welcome to the hadoken forums</h2>
+            <p>Hadoken forums is a community designed to: </p>
 
-		<div class="welcome_text">
-		<h2>Welcome to the hadoken forums</h2>
-			<p>Hadoken forums is a community designed to: </p>
+                <li>discuss fighting games</li><br>
+                <li>keep up with, create and publicize tournaments</li><br>
+                <li>find gameplay resources for your favorite games</li><br>
+                <li>find matches with other players</li><br>
+            
+            <p>You can view all content here without an account but if you're interested in joining the community consider <a href="../register.php">creating an account!</a></p> 
+        </div>
 
-				<li>discuss fighting games</li><br>
-				<li>keep up with, create and publicize tournaments</li><br>
-				<li>find gameplay resources for your favorite games</li><br>
-				<li>find matches with other players</li><br>
-			
-			<p>You can view all content here without an account but if you're interested in joining the community consider <a href="register.php">creating an account!</a></p> 
-		</div>
-		
-		<div class="registerform">
-		<h3>Register Form</h3>
-			<form id="signin" name="signin" method="post" action="scripts/signin.script.php">
-				
-			<div class="input-container">
-				<i class="fa fa-user icon"></i>
-				<input class="input-field" type="text" placeholder="Insert username" name="usr" required>
-			</div>
-
-			<div class="input-container">
-				<i class="fa fa-envelope icon"></i>
-				<input class="input-field" type="text" placeholder="Insert email" name="email" required>
-			</div>
-
-			<div class="input-container">
-				<i class="fa fa-key icon"></i>
-				<input class="input-field" type="password" placeholder="Insert password" name="pwd" required>
-			</div>
-
-				<input class="btn" type="submit" name="submit" value="signin">
-			</form>
-			<?php
-			//comunico anche l'eventuale tentativo errato di register
-			if(isset($_SESSION["errore_register"]) && $_SESSION["errore_register"]==true){
-				echo "<p>Nome utente già in utilizzo</p>";
-				unset($_SESSION["errore_login"]);
-			}
-		?>
-		</div>
-	</div>
-
-	<div class="footer">
+        <div class="category_table">
+            
+        <?php
+         
+            if(!$risultato2)
+            {
+                echo 'The categories could not be displayed, please try again later.';
+            }
+            else
+            {
+               
+                    //prepare the table
+                    echo '<table border="1">
+                          <tr>
+                            <th>Category</th>
+                            <th>Last topic</th>
+                          </tr>'; 
+                         
+                    while($row = $risultato2->fetch_assoc())
+                    {               
+                        echo '<tr>';
+                            echo '<td class="leftpart">';
+                                echo '<h3><a href="category.php?id=' . $row['Categoryid'] . '">' . $row['title'] . '</a></h3>' . $row['description'];
+                            echo '</td>';
+                            echo '<td class="rightpart">';
+                                        echo '<a href="topic.php?id=">Topic subject</a> at 10-10';
+                            echo '</td>';
+                        echo '</tr>';
+                        
+                    }
+                }
+            
+            echo '</table>';
+        ?>
+        </div>
+        
+    </div>
+    
+    
+    <div class="footer">
         <div class="about">
             <H3>About</H3>
             <a href="">Contact</a><br>
@@ -183,5 +197,10 @@ session_start();
             </div>
         </div>    
     </div>
-	</body>
+          
+    
+    
+    </body>
+
+    
 </html>

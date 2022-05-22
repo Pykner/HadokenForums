@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Creato il: Mag 19, 2022 alle 23:29
+-- Creato il: Mag 22, 2022 alle 21:57
 -- Versione del server: 10.4.22-MariaDB
 -- Versione PHP: 8.1.2
 
@@ -44,7 +44,41 @@ INSERT INTO `account` (`Accountid`, `user`, `hash`, `stat`, `email`, `pic`) VALU
 (1, 'Pykner', '$2y$10$fHcbP6AGEMTWRqaupaxg8.NRSOZ8OUlFQ5xbG8Fu7dnWmDAuPBlwS', 'Hello! i am an hadoken forums user.', 'emasonic2@gmail.com', 'img/profile/profilepic1.jpg'),
 (2, 'gamering69420', '$2y$10$UPBR8brRLIM.ugixYSQ4K.TmuY52FPZJNV/UwsebIfS5kFbfIjkXW', 'Hello! i am an hadoken forums user.', 'gamering69420@gmail.com', 'img/profile/profilepic1.jpg'),
 (3, 'Ky_main', '$2y$10$.hfO1RHqnarFNDi7rG2LheiMD3n2H0B9JyvRZZHhJxI2/yamPNngm', 'Hello! i am an hadoken forums user.', 'runupgrab@gmail.com', 'img/profile/profilepic1.jpg'),
-(4, 'Baiken_main', '$2y$10$.QWG.NZOoFrgsd7yEPMwZege93x4A6xgRMrgEj6w.s6VJUx2YVuWy', 'Hello! i am an hadoken forums user.', 'booba@booba.com', 'img/profile/profilepic2.jpg');
+(4, 'Baiken_main', '$2y$10$.QWG.NZOoFrgsd7yEPMwZege93x4A6xgRMrgEj6w.s6VJUx2YVuWy', 'Hello! i am an hadoken forums user.', 'booba@booba.com', 'img/profile/profilepic2.jpg'),
+(5, 'jin_main', '$2y$10$EHmtV1Ihps2SObkZ5Y4X8u6won1V3b/4kKJ4dDXR7h8laBQq7.3oK', 'Hello! i am an hadoken forums user.', 'electric@mishima.com', 'img/profile/profilepic1.jpg');
+
+-- --------------------------------------------------------
+
+--
+-- Struttura della tabella `category`
+--
+
+CREATE TABLE `category` (
+  `Categoryid` int(11) NOT NULL,
+  `title` varchar(255) DEFAULT NULL,
+  `description` varchar(8000) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dump dei dati per la tabella `category`
+--
+
+INSERT INTO `category` (`Categoryid`, `title`, `description`) VALUES
+(1, 'Website feedback', 'Have you noticed something wrong with the site? Do you have any ideas on how to improve Hadokenforums? Drop a post in here and let us know!'),
+(2, 'Guilty Gear general', 'The forum for general topics about Guilty Gear. Discussions on techniques, strategies, glitches, and match info, should be posted in their specific forums!'),
+(3, 'Strive matchup discussion', 'A place to discuss Guilty Gear Strive matchups'),
+(4, 'Tekken general', 'The forum for general topics about tekken. Discussions on techniques, strategies, glitches, and match info, should be posted in their specific forums!');
+
+-- --------------------------------------------------------
+
+--
+-- Struttura della tabella `game`
+--
+
+CREATE TABLE `game` (
+  `Gameid` int(11) NOT NULL,
+  `title` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -70,11 +104,9 @@ CREATE TABLE `matchmaking` (
 
 CREATE TABLE `posts` (
   `Postid` int(11) NOT NULL,
-  `title` varchar(50) DEFAULT NULL,
   `txt` varchar(8000) DEFAULT NULL,
   `date_post` datetime DEFAULT NULL,
-  `likes` int(11) DEFAULT NULL,
-  `FkThreadId` int(11) DEFAULT NULL,
+  `FkTopicid` int(11) DEFAULT NULL,
   `FkAccountid` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -89,20 +121,32 @@ CREATE TABLE `resources` (
   `title` varchar(50) DEFAULT NULL,
   `txt` varchar(8000) DEFAULT NULL,
   `valid` tinyint(1) DEFAULT NULL,
-  `FkAccountid` int(11) DEFAULT NULL
+  `FkAccountid` int(11) DEFAULT NULL,
+  `FkGameid` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
 --
--- Struttura della tabella `threads`
+-- Struttura della tabella `topics`
 --
 
-CREATE TABLE `threads` (
-  `Threadid` int(11) NOT NULL,
-  `FkAccountid` int(11) DEFAULT NULL,
-  `title` varchar(50) DEFAULT NULL
+CREATE TABLE `topics` (
+  `Topicid` int(11) NOT NULL,
+  `title` varchar(255) DEFAULT NULL,
+  `txt` varchar(8000) DEFAULT NULL,
+  `date_post` datetime DEFAULT NULL,
+  `likes` int(11) DEFAULT NULL,
+  `FkCategory` int(11) DEFAULT NULL,
+  `FkAccount` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dump dei dati per la tabella `topics`
+--
+
+INSERT INTO `topics` (`Topicid`, `title`, `txt`, `date_post`, `likes`, `FkCategory`, `FkAccount`) VALUES
+(1, 'What do you think will be unvailed in the may 25th season 2 announcement?', 'What do you guys think arcsys will show off on the 25th? i\'m expecting a release date for cross-play and at least one character reveal.\r\nI hope it\'s sin.', '2022-05-22 21:26:28', 32, 2, 3);
 
 -- --------------------------------------------------------
 
@@ -145,6 +189,18 @@ ALTER TABLE `account`
   ADD PRIMARY KEY (`Accountid`);
 
 --
+-- Indici per le tabelle `category`
+--
+ALTER TABLE `category`
+  ADD PRIMARY KEY (`Categoryid`);
+
+--
+-- Indici per le tabelle `game`
+--
+ALTER TABLE `game`
+  ADD PRIMARY KEY (`Gameid`);
+
+--
 -- Indici per le tabelle `matchmaking`
 --
 ALTER TABLE `matchmaking`
@@ -156,22 +212,24 @@ ALTER TABLE `matchmaking`
 --
 ALTER TABLE `posts`
   ADD PRIMARY KEY (`Postid`),
-  ADD KEY `FkAccountid` (`FkAccountid`),
-  ADD KEY `postThreadsIndex` (`FkThreadId`,`date_post`);
+  ADD KEY `FkTopicid` (`FkTopicid`),
+  ADD KEY `FkAccountid` (`FkAccountid`);
 
 --
 -- Indici per le tabelle `resources`
 --
 ALTER TABLE `resources`
   ADD PRIMARY KEY (`Resourceid`),
-  ADD KEY `FkAccountid` (`FkAccountid`);
+  ADD KEY `FkAccountid` (`FkAccountid`),
+  ADD KEY `FkGameid` (`FkGameid`);
 
 --
--- Indici per le tabelle `threads`
+-- Indici per le tabelle `topics`
 --
-ALTER TABLE `threads`
-  ADD PRIMARY KEY (`Threadid`),
-  ADD KEY `FkAccountid` (`FkAccountid`);
+ALTER TABLE `topics`
+  ADD PRIMARY KEY (`Topicid`),
+  ADD KEY `FkCategory` (`FkCategory`),
+  ADD KEY `FkAccount` (`FkAccount`);
 
 --
 -- Indici per le tabelle `tournament`
@@ -194,7 +252,13 @@ ALTER TABLE `webupdate`
 -- AUTO_INCREMENT per la tabella `account`
 --
 ALTER TABLE `account`
-  MODIFY `Accountid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `Accountid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT per la tabella `game`
+--
+ALTER TABLE `game`
+  MODIFY `Gameid` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT per la tabella `matchmaking`
@@ -213,12 +277,6 @@ ALTER TABLE `posts`
 --
 ALTER TABLE `resources`
   MODIFY `Resourceid` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT per la tabella `threads`
---
-ALTER TABLE `threads`
-  MODIFY `Threadid` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT per la tabella `tournament`
@@ -246,20 +304,22 @@ ALTER TABLE `matchmaking`
 -- Limiti per la tabella `posts`
 --
 ALTER TABLE `posts`
-  ADD CONSTRAINT `posts_ibfk_1` FOREIGN KEY (`FkThreadId`) REFERENCES `threads` (`Threadid`),
+  ADD CONSTRAINT `posts_ibfk_1` FOREIGN KEY (`FkTopicid`) REFERENCES `topics` (`Topicid`),
   ADD CONSTRAINT `posts_ibfk_2` FOREIGN KEY (`FkAccountid`) REFERENCES `account` (`Accountid`);
 
 --
 -- Limiti per la tabella `resources`
 --
 ALTER TABLE `resources`
-  ADD CONSTRAINT `resources_ibfk_1` FOREIGN KEY (`FkAccountid`) REFERENCES `account` (`Accountid`);
+  ADD CONSTRAINT `resources_ibfk_1` FOREIGN KEY (`FkAccountid`) REFERENCES `account` (`Accountid`),
+  ADD CONSTRAINT `resources_ibfk_2` FOREIGN KEY (`FkGameid`) REFERENCES `game` (`Gameid`);
 
 --
--- Limiti per la tabella `threads`
+-- Limiti per la tabella `topics`
 --
-ALTER TABLE `threads`
-  ADD CONSTRAINT `threads_ibfk_1` FOREIGN KEY (`FkAccountid`) REFERENCES `account` (`Accountid`);
+ALTER TABLE `topics`
+  ADD CONSTRAINT `topics_ibfk_1` FOREIGN KEY (`FkCategory`) REFERENCES `category` (`Categoryid`),
+  ADD CONSTRAINT `topics_ibfk_2` FOREIGN KEY (`FkAccount`) REFERENCES `account` (`Accountid`);
 
 --
 -- Limiti per la tabella `tournament`

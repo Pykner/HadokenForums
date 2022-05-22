@@ -44,13 +44,7 @@ session_start();
     <nav class="navbar">
         <ul>
             <li><a href="index.php"><i class="fa fa-fw fa-home"></i>Home</a></li>
-            <li class="dropdown">
-                <a href="javascript:void(0)" class="dropbtn"><i class="fa fa-commenting-o"></i>Forums</a>
-                <div class="dropdown-content">
-                    <a href="#">See posts</a>
-                    <a href="#">Create post</a>
-                </div>
-            </li>
+            <li><a href="forums/forums.php"><i class="fa fa-commenting-o"></i>Forums</a></li>
             <li class="dropdown">
                 <a href="javascript:void(0)" class="dropbtn"><i class="fa fa-trophy" ></i>Tournaments</a>
                 <div class="dropdown-content">
@@ -63,7 +57,7 @@ session_start();
             <li class="dropdown">
                 <a href="javascript:void(0)" class="dropbtn"><i class="fa fa-book"></i>Resources</a>
                 <div class="dropdown-content">
-                    <a href="resourceindex.php">See resources</a>
+                    <a href="resources/resourceindex.php">See resources</a>
                     <a href="#">Submit resource</a>
                 </div>
             </li>
