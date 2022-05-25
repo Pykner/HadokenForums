@@ -8,8 +8,6 @@ body{
 
 .bodyinner{
   background-color: #171717;
-  margin-left: 2%;
-  margin-right: 2%;
   padding-top: 4px;
   padding-bottom: 20px;
 }
@@ -39,8 +37,7 @@ ul {
         position: -webkit-sticky;
         text-align: center;
         top: 0;
-        margin-left: 2%;
-        margin-right: 2%;
+        
       }
 
     li {
@@ -235,6 +232,11 @@ margin-left: 1%;
   margin-bottom: 20px;
   padding: 0 18px;
   overflow: hidden;
+}
+
+.ltsttable{
+  margin-left: 0;
+  margin-right: 0;
 }
 
 

@@ -25,7 +25,7 @@ session_start();
 				//eseguo la query
 				$risultato1 = $mydb->query($query1);
 
-                $query2 = "SELECT Accountid, user, email, stat , pic FROM account WHERE user = '".$_SESSION['username']."'";
+                $query2 = "SELECT Accountid, user, email, stat , pic FROM account WHERE user = '". $mydb->real_escape_string($_GET['id']) ."'";
 
 				//eseguo la query
 				$risultato2 = $mydb->query($query2);
@@ -33,7 +33,7 @@ session_start();
                 $querypost = "SELECT 
                 (SELECT count(Postid) FROM posts ) AS Count1,
                 (SELECT count(Topicid) FROM topics ) AS Count2
-              FROM posts, topics";
+              FROM posts, topics LIMIT 0,1";
 
                 $risultatopost = $mydb->query($querypost);
 			?>
@@ -79,7 +79,7 @@ session_start();
             <?php
 
             if(isset($_SESSION["username"])){
-                ?><li style="float:right"><a href="account.php"><i class="fa fa-user"></i><?php echo $_SESSION["username"]?></a>
+                ?><li style="float:right"><a href='account.php?id=<?php echo $_SESSION["username"]?>'><i class="fa fa-user"></i><?php echo $_SESSION["username"]?></a>
             <?php
             }else{
                 ?><li style="float:right"><a onclick="document.getElementById('id01').style.display='block'" style="width:auto;"><i class="fa fa-user"></i>login</a>
@@ -151,35 +151,195 @@ session_start();
             <h1>Latest from this user:</h1>
 
             <div class="tabs">
-                <button class="tablink" onclick="openTab('posts', this, '#F8B552')" id="defaultOpen">Posts</button>
+                <button class="tablink" onclick="openTab('posts', this, '#F8B552')" id="defaultOpen">Topics</button>
                 <button class="tablink" onclick="openTab('resources', this, '#F8B552')">Resources</button>
                 <button class="tablink" onclick="openTab('tournaments', this, '#F8B552')">Tournaments</button>
                 <button class="tablink" onclick="openTab('matchmaking', this, '#F8B552')">Matchmaking</button>
             </div>
 
                 <div id="posts" class="tabcontent">
-                <h1>London</h1>
-                <p>England is my city.</p>
+                    <?php
+                        $querytopic = "SELECT  
+                            topics.Topicid,
+                            topics.title AS topic_title,
+                            topics.txt,
+                            topics.date_post,
+                            account.user
+                        FROM
+                            topics
+                        LEFT JOIN
+                            account ON account.AccountId = topics.FkAccount 
+                        WHERE 
+                            account.user ='" . $mydb->real_escape_string($_GET['id']) . "'
+                        ORDER BY Topicid DESC
+                        LIMIT 0,3"
+                          ;
+            
+                $risultatotopic = $mydb->query($querytopic);
+                        if(!$risultatotopic)
+                        {
+                            echo 'The topics could not be displayed, please try again later.';
+                        }
+                        else
+                        {           
+                                while($row = $risultatotopic->fetch_assoc())
+                                {               
+                                    echo '<div class="tabheader_content">';
+                                        echo '<h1><a href="forums/topic.php?id=' . $row['Topicid'] . '">' . $row['topic_title'] . '</a></h1>';
+                                        echo '<p>'. $row['txt'] .'</p>';
+                                    echo '</div>';
+
+                                    echo '<div class="tabheader_leftinfo">';
+                                        echo '<h2>';
+                                            echo date('d-m-Y', strtotime($row['date_post']));
+                                        echo '</h2>';
+                                    echo '</div>';
+                                    echo'<div style="clear:both;"></div>';
+                                       
+                                }
+                            }
+                        
+                    ?>
                 </div>
 
                 <div id="resources" class="tabcontent">
-                <h1>Paris</h1>
-                <p>Paris is the capital of France.</p> 
+                    <?php
+                        $queryresources = "SELECT  
+                            resources.Resourceid,
+                            resources.title AS resource_title,
+                            account.user,
+                            resources.valid,
+                            game.title
+                        FROM
+                            resources
+                        INNER JOIN
+                            account ON account.AccountId = resources.FkAccountid
+                        LEFT JOIN
+                            game ON game.Gameid = resources.Fkgameid
+                        WHERE 
+                            account.user ='" . $mydb->real_escape_string($_GET['id']) . "'
+                        ORDER BY Resourceid DESC
+                        LIMIT 0,3"
+                        ;
+        
+                $risultatoresources = $mydb->query($queryresources);
+                if(!$risultatoresources)
+                {
+                    echo 'The resources could not be displayed, please try again later.';
+                }
+                else
+                {           
+                        while($row = $risultatoresources->fetch_assoc())
+                        {               
+                            echo '<div class="tabheader_content">';
+                                echo '<h1><a href="resource/resource.php?id=' . $row['Resourceid'] . '">' . $row['resource_title'] . '</a></h1>';                             
+                            echo '</div>';
+
+                            echo '<div class="tabheader_leftinfo">';
+                                echo '<h2>';
+                                    echo  $row['title'];
+                                echo '</h2>';
+
+                                echo '<h2>';
+                                    if($row['valid'] == 0){
+                                        echo 'Resource not validated yet';
+                                    }else{
+                                        echo 'Valid resource';
+                                    }
+                                echo '</h2>';
+                            echo '</div>';
+                            echo'<div style="clear:both;"></div>';
+                               
+                        }
+                    }
+
+                    ?>
                 </div>
 
                 <div id="tournaments" class="tabcontent">
-                <h1>Tokyo</h1>
-                <p>Tokyo is the capital of Japan.</p>
+                    <?php
+                        $querytourneys = "SELECT  
+                        tournament.id,
+                        tournament.title AS tournament_title,
+                        tournament.link,
+                        tournament.txt,
+                        tournament.data_inizio,
+                        tournament.data_fine,
+                        tournament.online,
+                        account.user
+                    FROM
+                        tournament
+                    LEFT JOIN
+                        account ON account.AccountId = tournament.FkAccountid
+                    WHERE 
+                        account.user ='" . $mydb->real_escape_string($_GET['id']) . "'
+                    ORDER BY id DESC
+                    LIMIT 0,3"
+                    ;
+    
+                $risultatotourneys = $mydb->query($querytourneys);
+                if(!$risultatotourneys)
+                {
+                    echo 'The resources could not be displayed, please try again later.';
+                }
+                else
+                {           
+                        while($row = $risultatotourneys->fetch_assoc())
+                        {               
+                            echo '<div class="tabheader_content">';
+                                echo '<h1><a href="tournaments/tournament.php?id=' . $row['id'] . '">' . $row['tournament_title'] . '</a></h1>';
+                                echo '<p><a href="' . $row['link'] . '">Tournament Link</a><p>';                             
+                            echo '</div>';
+
+                            echo '<div class="tabheader_leftinfo">';
+                                echo'<h2>Start date:</h2>';
+                                echo '<p>';
+                                    echo  $row['data_inizio'];
+                                echo '</p>';
+
+                                if($row['online'] == 1){
+                                    echo'<h2>Online Tournament</h2>';
+                                }
+                            echo '</div>';
+                            echo'<div style="clear:both;"></div>';
+                               
+                        }
+                    }
+                    ?>
                 </div>
 
                 <div id="matchmaking" class="tabcontent">
-                <h1>Oslo</h1>
-                <p>Oslo is the capital of Norway.</p>
+                    <?php
+                        $querymatchmaking = "SELECT  
+                        matchamaking.Matchmakingid,
+                        topics.title AS topic_title,
+                        topics.txt,
+                        topics.date_post,
+                        account.user
+                    FROM
+                        topics
+                    LEFT JOIN
+                        account ON account.AccountId = topics.FkAccount 
+                    WHERE 
+                        account.user ='" . $mydb->real_escape_string($_GET['id']) . "'
+                    LIMIT 0,3"
+                    ;
+    
+            $risultatomatchmaking = $mydb->query($querymatchmaking);
+                        echo'<h1>London</h1>
+                        <p>England is my city.</p>';
+                    ?>
                 </div>
 
                 <script src="js/tabheader.js"></script>
-
+            
+                <?php
+                    if($_SESSION['username'] == $mydb->real_escape_string($_GET['id'])){
+                ?>
             <button class="btn"> <a id="out" href="scripts/logout.script.php">Log out </a></button>
+                <?php
+                    }
+                ?>
         </div>
 
         <?php }}?>

@@ -28,7 +28,7 @@ session_start();
                 $querypost = "SELECT 
                 (SELECT count(Postid) FROM posts ) AS Count1,
                 (SELECT count(Topicid) FROM topics ) AS Count2
-              FROM posts, topics";
+              FROM posts, topics LIMIT 0,1";
 
                 $risultatopost = $mydb->query($querypost);
 			?>
@@ -73,7 +73,7 @@ session_start();
             <?php
 
             if(isset($_SESSION["username"])){
-                ?><li style="float:right"><a href="account.php"><i class="fa fa-user"></i><?php echo $_SESSION["username"]?></a>
+                ?><li style="float:right"><a href='account.php?id=<?php echo $_SESSION["username"]?>'><i class="fa fa-user"></i><?php echo $_SESSION["username"]?></a>
             <?php
             }else{
                 ?><li style="float:right"><a onclick="document.getElementById('id01').style.display='block'" style="width:auto;"><i class="fa fa-user"></i>login</a>

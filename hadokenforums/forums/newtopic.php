@@ -3,10 +3,9 @@ session_start();
 ?>
 <html>
     <head>
-        <title>HadokenForums - Topics</title>
+        <title>HadokenForums - Create topic</title>
         <link rel = "icon" href = "../img/icon.jpg" type = "image/x-icon">
         <link rel="stylesheet" href="../css/homestyle.css?t=<?php echo round(microtime(true)*1000);?>">
-        <link rel="stylesheet" href="../css/forums.css?t=<?php echo round(microtime(true)*1000);?>">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     </head>
 
@@ -25,17 +24,12 @@ session_start();
 				//eseguo la query
 				$risultato1 = $mydb->query($query1);
 
-                $query2 = "SELECT Categoryid, title, description FROM category WHERE Categoryid = ". $mydb->real_escape_string($_GET['id']);
-
-                $risultato2 = $mydb->query($query2);
-
                 $querypost = "SELECT 
                 (SELECT count(Postid) FROM posts ) AS Count1,
                 (SELECT count(Topicid) FROM topics ) AS Count2
               FROM posts, topics LIMIT 0,1";
 
                 $risultatopost = $mydb->query($querypost);
-                
 			?>
 
 
@@ -52,8 +46,7 @@ session_start();
     <nav class="navbar">
         <ul>
             <li><a href="../index.php"><i class="fa fa-fw fa-home"></i>Home</a></li>
-            <li><a href="forums.php"><i class="fa fa-commenting-o"></i>Forums</a></li>
-
+            <li><a href="../forums/forums.php"><i class="fa fa-commenting-o"></i>Forums</a></li>
             <li class="dropdown">
                 <a href="javascript:void(0)" class="dropbtn"><i class="fa fa-trophy" ></i>Tournaments</a>
                 <div class="dropdown-content">
@@ -94,7 +87,7 @@ session_start();
 
     <div id="id01" class="modal">
   
-        <form class="modal-content animate" id="login" name="login" method="post" action="../scripts/login.script.php">
+        <form class="modal-content animate" id="login" name="login" method="post" action="scripts/login.script.php">
  
       <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
 
@@ -127,110 +120,58 @@ session_start();
     </div>
 
     <div class="bodyinner">
-        <?php 
-        if(!$risultato2)
+        <?php
+            echo '<h2>Create a topic</h2>';
+            if(isset($_SESSION['username']) == false)
             {
-                echo 'The category could not be displayed, please try again later.' . mysql_error();
+                //the user is not signed in
+                echo 'Sorry, you have to be <a href="../register.php">signed in</a> to create a topic.';
             }
             else
-            {
-                
-                    //display category data
-                    while($row = $risultato2->fetch_assoc())
-                    {   
-                        echo '<div class="forum_title">';
-                        echo '<h2>Topics in ′' . $row['title'] . '′';
-                        echo '</div>';
-                    }
-                
-                    //do a query for the topics
-                    $query3 = "SELECT  
-                                Topicid,
-                                title AS topic_title,
-                                date_post,
-                                FkCategory
-                            FROM
-                                topics
-                            WHERE
-                                FkCategory = " . $mydb->real_escape_string($_GET['id']);
-                    
-                    $risultato3 = $mydb->query($query3);
-                    
-                    if(!$risultato3)
-                    {
-                        echo 'The topics could not be displayed, please try again later.';
-                    }
-                    else
-                    {
-                        echo '<div class="forumposts">';
-                            //prepare the table
-                            echo '<table border="1" id="forumposts">
-                                <tr>
-                                    <th>Topic</th>
-                                    <th>Created</th>
-                                </tr>';
-                                if(isset($_SESSION["username"])){
-                                    echo '<tr>
-                                        <td class="leftpart"><h3><a href="newtopic.php?id=' . $mydb->real_escape_string($_GET['id']) . '">Create a topic</a></h3></td>
-                                        <td class="rightpart"></td>
-                                    </tr> '; 
-                                }
+            {                
+                            echo '<form method="post" action="../scripts/newtopic.script.php?id= '. $mydb->real_escape_string($_GET['id']) .'">
+                                Subject: <input type="text" name="topic_subject" />
+                                Category:';  
                                 
-                            while($row = $risultato3->fetch_assoc())
-                            {               
-                                echo '<tr>';
-                                    echo '<td class="leftpart">';
-                                        echo '<h3><a href="topic.php?id=' . $row['Topicid'] . '">' . $row['topic_title'] . '</a><h3>';
-                                    echo '</td>';
-                                    echo '<td class="rightpart">';
-                                        echo date('d-m-Y', strtotime($row['date_post']));
-                                    echo '</td>';
-                                echo '</tr>';
-                            }
-                        }
-                    }
-                
+                            echo 'Message: <textarea name="post_content" /></textarea>
+                                <input type="submit" value="Create topic" />
+                            </form>';
+            }
             
-            echo '</table>';
-            echo '</div>';
+            
 ?>
     </div>
-    
-    
-    <div class="footer">
-        <div class="about">
-            <H3>About</H3>
-            <a href="">Contact</a><br>
-            <a href="">Creator</a>
-        </div>
 
-        <div class="stats">
-            <H3>Forum stats</H3>
-            <?php
-				while($row=$risultato1->fetch_assoc()){
-					echo '<p>There are '.$row["num_account"].' registered members!</p>';
-				}
-			?>
-            <?php
-				while($row=$risultatopost->fetch_assoc()){
-					echo '<p>There are '.$row["Count1"] .' posts and '.$row["Count2"] .' topics!</p>';
-				}
-			?>
-        </div>
-            
-        <div class="share">
-            <H3>Share this page</H3>
-            <div class="icon-bar">
-                <a href="https://www.facebook.com" class="facebook"><i class="fa fa-facebook"></i></a> 
-                <a href="https://twitter.com" class="twitter"><i class="fa fa-twitter"></i></a> 
-                <a href="https://www.youtube.com" class="youtube"><i class="fa fa-youtube"></i></a> 
-            </div>
-        </div>    
+<div class="footer">
+    <div class="about">
+        <H3>About</H3>
+        <a href="">Contact</a><br>
+        <a href="">Creator</a>
     </div>
-          
-    
-    
-    </body>
 
-    
+    <div class="stats">
+        <H3>Forum stats</H3>
+        <?php
+            while($row=$risultato1->fetch_assoc()){
+                echo '<p>There are '.$row["num_account"].' registered members!</p>';
+            }
+        ?>
+        <?php
+            while($row=$risultatopost->fetch_assoc()){
+                echo '<p>There are '.$row["Count1"] .' posts and '.$row["Count2"] .' topics!</p>';
+            }
+        ?>
+    </div>
+        
+    <div class="share">
+        <H3>Share this page</H3>
+        <div class="icon-bar">
+            <a href="https://www.facebook.com" class="facebook"><i class="fa fa-facebook"></i></a> 
+            <a href="https://twitter.com" class="twitter"><i class="fa fa-twitter"></i></a> 
+            <a href="https://www.youtube.com" class="youtube"><i class="fa fa-youtube"></i></a> 
+        </div>
+    </div>    
+</div>
+
+</body>
 </html>

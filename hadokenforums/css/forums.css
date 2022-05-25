@@ -35,15 +35,23 @@
     width: 32px;
 }
 
-h2{
+.forum_title{
     color: white;
     text-align: center;
 }
 
+.btn {
+    width: 10%;
+    background-color: red;
+    color: white;
+    text-decoration: none;
+    padding: 10px 10px;
+    cursor: pointer;
+    opacity: 0.9;
+  }
+
 table {
     margin-top: 30px;
-    margin-left: auto;
-    margin-right: auto;
     border-collapse: collapse;
     width: 90%;
     
@@ -67,7 +75,11 @@ td {
 /* Menu styles */
  
 .leftpart {
-    width: 60%;
+    width: 60%; 
+}
+
+.leftpart a{
+    text-decoration: none;
 }
  
 .rightpart {
@@ -91,4 +103,9 @@ td {
 textarea {
     width: 500px;
     height: 200px;
+}
+
+#forumposts{
+    margin-left: auto;
+    margin-right: auto;
 }

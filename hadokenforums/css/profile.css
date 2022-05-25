@@ -59,8 +59,12 @@ color: #F8B552;
     color: white;
     display: none;
     padding: 50px;
-    text-align: center;
     background-color: #1a1818;
+  }
+
+  .tabcontent a{
+    text-decoration: none;
+    color: #F8B552;
   }
 
   .btn {
@@ -79,3 +83,11 @@ color: #F8B552;
   #out{
     color: white;
   }
+
+.tabheader_content{
+  float: left;
+}
+
+.tabheader_leftinfo{
+  float: right;
+}

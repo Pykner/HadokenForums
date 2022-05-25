@@ -132,7 +132,7 @@ CREATE TABLE `resources` (
 --
 
 CREATE TABLE `topics` (
-  `Topicid` int(11) NOT NULL,
+  `Topicid` int(11) NOT NULL ,
   `title` varchar(255) DEFAULT NULL,
   `txt` varchar(8000) DEFAULT NULL,
   `date_post` datetime DEFAULT NULL,
@@ -251,6 +251,10 @@ ALTER TABLE `webupdate`
 --
 -- AUTO_INCREMENT per la tabella `account`
 --
+
+ALTER TABLE `topics`
+  MODIFY `Topicid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
 ALTER TABLE `account`
   MODIFY `Accountid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 

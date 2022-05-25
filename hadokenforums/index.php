@@ -6,6 +6,7 @@ session_start();
         <title>HadokenForums - Home</title>
         <link rel = "icon" href = "img/icon.jpg" type = "image/x-icon">
         <link rel="stylesheet" href="css/homestyle.css?t=<?php echo round(microtime(true)*1000);?>">
+        <link rel="stylesheet" href="css/forums.css?t=<?php echo round(microtime(true)*1000);?>">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     </head>
 
@@ -27,7 +28,7 @@ session_start();
                 $querypost = "SELECT 
                 (SELECT count(Postid) FROM posts ) AS Count1,
                 (SELECT count(Topicid) FROM topics ) AS Count2
-              FROM posts, topics";
+              FROM posts, topics LIMIT 0,1";
 
                 $risultatopost = $mydb->query($querypost);
 			?>
@@ -53,7 +54,6 @@ session_start();
                     <a href="#">Majors</a>
                     <a href="#">See tournaments</a>
                     <a href="#">Create tournament</a>
-                    <a href="#">Manage tournaments</a>
                 </div>
             </li>
             <li class="dropdown">
@@ -75,7 +75,7 @@ session_start();
             <?php
 
             if(isset($_SESSION["username"])){
-                ?><li style="float:right"><a href="account.php"><i class="fa fa-user"></i><?php echo $_SESSION["username"]?></a>
+                ?><li style="float:right"><a href='account.php?id=<?php echo $_SESSION["username"]?>'><i class="fa fa-user"></i><?php echo $_SESSION["username"]?></a>
             <?php
             }else{
                 ?><li style="float:right"><a onclick="document.getElementById('id01').style.display='block'" style="width:auto;"><i class="fa fa-user"></i>login</a>
@@ -154,8 +154,55 @@ session_start();
             
 
     <div class="ltstpost">
-            <h3>Latest forum posts</h3>
-            <H2>THIS IS WHERE THE LATEST POSTS GO</H2>
+            <h3>Latest topics</h3>
+            <div class="ltsttable">
+                <?php   
+                        
+                            //do a query for the topics
+                            $query3 = "SELECT  
+                                            Topicid,
+                                            title AS topic_title,
+                                            date_post,
+                                            FkCategory
+                                        FROM
+                                            topics
+                                        ORDER BY date_post DESC LIMIT 0,10";
+                            
+                            $risultato3 = $mydb->query($query3);
+                            
+                            if(!$risultato3)
+                            {
+                                echo 'The topics could not be displayed, please try again later.';
+                            }
+                            else
+                            {
+                            
+                                    //prepare the table
+                                    echo '<table border="1">
+                                        <tr>
+                                            <th>Topic</th>
+                                            <th>Created</th>
+                                        </tr>';
+                                        
+                                    while($row = $risultato3->fetch_assoc())
+                                    {               
+                                        echo '<tr>';
+                                            echo '<td class="leftpart">';
+                                                echo '<h3><a href="forums/topic.php?id=' . $row['Topicid'] . '">' . $row['topic_title'] . '</a><h3>';
+                                            echo '</td>';
+                                            echo '<td class="rightpart">';
+                                                echo date('d-m-Y', strtotime($row['date_post']));
+                                            echo '</td>';
+                                        echo '</tr>';
+                                    }
+                                }
+                            
+                        
+                    
+                    echo '</table>';
+                ?>
+
+            </div>
     </div>
 
     </div>

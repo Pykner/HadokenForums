@@ -3,7 +3,7 @@ session_start();
 ?>
 <html>
     <head>
-        <title>HadokenForums - Home</title>
+        <title>HadokenForums - posts</title>
         <link rel = "icon" href = "../img/icon.jpg" type = "image/x-icon">
         <link rel="stylesheet" href="../css/homestyle.css?t=<?php echo round(microtime(true)*1000);?>">
         <link rel="stylesheet" href="../css/forums.css?t=<?php echo round(microtime(true)*1000);?>">
@@ -36,7 +36,7 @@ session_start();
                 $querypost = "SELECT 
                 (SELECT count(Postid) FROM posts ) AS Count1,
                 (SELECT count(Topicid) FROM topics ) AS Count2
-              FROM posts, topics";
+              FROM posts, topics LIMIT 0,1";
 
                 $risultatopost = $mydb->query($querypost);
                 
@@ -86,7 +86,7 @@ session_start();
             <?php
 
             if(isset($_SESSION["username"])){
-                ?><li style="float:right"><a href="../account.php"><i class="fa fa-user"></i><?php echo $_SESSION["username"]?></a>
+                ?><li style="float:right"><a href='../account.php?id=<?php echo $_SESSION["username"]?>'><i class="fa fa-user"></i><?php echo $_SESSION["username"]?></a>
             <?php
             }else{
                 ?><li style="float:right"><a onclick="document.getElementById('id01').style.display='block'" style="width:auto;"><i class="fa fa-user"></i>login</a>
@@ -141,13 +141,17 @@ session_start();
                 
                     //display topic data
                     while($row = $risultato2->fetch_assoc())
-                    {
+                    {   
+                        echo '<div class="forum_title">';
                         echo '<h2>Posts in ′' . $row['title'] . '′ </h2>';
+                        echo '</div>';
 
-                        echo '<table border="1">
+                        echo '<div class="forumposts">';
+
+                        echo '<table border="1" id="forumposts">
                                 <tr>
                                     <th>Parent post</th>
-                                    <th>Created at</th>
+                                    <th>Created</th>
                                 </tr>';
                                 
                                 echo '<tr>';
@@ -191,6 +195,13 @@ session_start();
                                     <th>Post</th>
                                     <th>Created at</th>
                                 </tr>';
+
+                                if(isset($_SESSION["username"])){
+                                    echo '<tr>
+                                        <td class="leftpart"><h3><a href="newpost.php?id=' . $mydb->real_escape_string($_GET['id']) . '">Create a reply</a></h3></td>
+                                        <td class="rightpart"></td>
+                                    </tr> '; 
+                                }
                                 
                             while($row = $risultato3->fetch_assoc())
                             {               
@@ -210,6 +221,7 @@ session_start();
                 
             
             echo '</table>';
+            echo '</div">';
 ?>
     </div>
     
