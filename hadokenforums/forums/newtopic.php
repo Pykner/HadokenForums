@@ -6,6 +6,7 @@ session_start();
         <title>HadokenForums - Create topic</title>
         <link rel = "icon" href = "../img/icon.jpg" type = "image/x-icon">
         <link rel="stylesheet" href="../css/homestyle.css?t=<?php echo round(microtime(true)*1000);?>">
+        <link rel="stylesheet" href="../css/forums.css?t=<?php echo round(microtime(true)*1000);?>">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     </head>
 
@@ -120,8 +121,9 @@ session_start();
     </div>
 
     <div class="bodyinner">
+        <div class="postform">
         <?php
-            echo '<h2>Create a topic</h2>';
+            echo '<h1>Create a topic</h1>';
             if(isset($_SESSION['username']) == false)
             {
                 //the user is not signed in
@@ -129,17 +131,20 @@ session_start();
             }
             else
             {                
+
                             echo '<form method="post" action="../scripts/newtopic.script.php?id= '. $mydb->real_escape_string($_GET['id']) .'">
-                                Subject: <input type="text" name="topic_subject" />
-                                Category:';  
+                                <h2 id="prompt">Insert topic title</h2>
+                                <input type="text" name="topic_subject" required />';  
                                 
-                            echo 'Message: <textarea name="post_content" /></textarea>
-                                <input type="submit" value="Create topic" />
+                            echo '<h2 id="prompt">Message:</h2> 
+                                <textarea name="post_content" required /></textarea><br>
+                                <input class="btnForm" type="submit" value="Create topic" />
                             </form>';
             }
             
             
 ?>
+    </div>
     </div>
 
 <div class="footer">

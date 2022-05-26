@@ -152,7 +152,8 @@ session_start();
                             FROM
                                 topics
                             WHERE
-                                FkCategory = " . $mydb->real_escape_string($_GET['id']);
+                                FkCategory = " . $mydb->real_escape_string($_GET['id']) ."
+                                ORDER BY date_post DESC";
                     
                     $risultato3 = $mydb->query($query3);
                     

@@ -120,18 +120,6 @@ session_start();
     <script src="js/modal.js"></script>
 
 	<div class="bodyinner">
-
-		<div class="welcome_text">
-		<h2>Welcome to the hadoken forums</h2>
-			<p>Hadoken forums is a community designed to: </p>
-
-				<li>discuss fighting games</li><br>
-				<li>keep up with, create and publicize tournaments</li><br>
-				<li>find gameplay resources for your favorite games</li><br>
-				<li>find matches with other players</li><br>
-			
-			<p>You can view all content here without an account but if you're interested in joining the community consider <a href="register.php">creating an account!</a></p> 
-		</div>
 		
 		<div class="registerform">
 		<h3>Register Form</h3>

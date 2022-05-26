@@ -156,11 +156,11 @@ session_start();
                                 
                                 echo '<tr>';
                                     echo '<td class="leftpart">';
-                                        echo '<h3><a href="../account.php?id=' . $row['topic_user'] . '">' . $row['topic_user'] . '</a></h3>';
                                         echo '<h2>' . $row['title'] . '</h2>';
                                         echo '<p>' . $row['txt'] . '</p>';
                                     echo '</td>';
                                     echo '<td class="rightpart">';
+                                        echo '<h3><a href="../account.php?id=' . $row['topic_user'] . '">' . $row['topic_user'] . '</a></h3>';
                                         echo date('d-m-Y', strtotime($row['date_post']));
                                     echo '</td>';
                                 echo '</tr>';
@@ -193,7 +193,7 @@ session_start();
                             echo '
                                 <tr>
                                     <th>Post</th>
-                                    <th>Created at</th>
+                                    <th>Created</th>
                                 </tr>';
 
                                 if(isset($_SESSION["username"])){
@@ -207,8 +207,8 @@ session_start();
                             {               
                                             
                                 echo '<tr>';
-                                    echo '<td class="leftpart">';
-                                        echo '<h3><a href="../account.php?id=' . $row['user'] . '">' . $row['user'] . '</a></h3>';
+                                    echo '<td class="leftpart">';      
+                                    echo '<h3><a href="../account.php?id=' . $row['user'] . '">' . $row['user'] . '</a></h3>';
                                         echo '<p>' . $row['txt'] . '</p>';
                                     echo '</td>';
                                     echo '<td class="rightpart">';

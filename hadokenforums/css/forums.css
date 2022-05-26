@@ -41,13 +41,24 @@
 }
 
 .btn {
-    width: 10%;
+    width: fit-content;
     background-color: red;
     color: white;
     text-decoration: none;
     padding: 10px 10px;
     cursor: pointer;
     opacity: 0.9;
+  }
+
+  .btnForm {
+    width: fit-content;
+    background-color: #F8B552;
+    color: white;
+    text-decoration: none;
+    padding: 10px 10px;
+    cursor: pointer;
+    opacity: 0.9;
+    margin-top: 10px;
   }
 
 table {
@@ -76,6 +87,7 @@ td {
  
 .leftpart {
     width: 60%; 
+    
 }
 
 .leftpart a{
@@ -84,6 +96,10 @@ td {
  
 .rightpart {
     width: 20%;
+}
+
+.rightpart a{
+    text-decoration: none;
 }
  
 .small {
@@ -99,13 +115,27 @@ td {
 .post-content {
     padding: 30px;
 }
+
  
 textarea {
-    width: 500px;
-    height: 200px;
+    width: 70%;
+    height: 40%;
+}
+
+.postform{
+    background-color: #282424;
+    margin-left: 2%;
+    margin-right: 2%;
+    margin-top: 20px;
+    padding: 10px;
 }
 
 #forumposts{
     margin-left: auto;
     margin-right: auto;
 }
+
+#prompt{
+    color: white;
+}
+

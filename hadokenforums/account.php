@@ -181,7 +181,12 @@ session_start();
                             echo 'The topics could not be displayed, please try again later.';
                         }
                         else
-                        {           
+                        {       
+                            if(mysqli_num_rows($risultatotopic) == 0){
+                       
+                                echo'<p>This user has not created any topics yet</p>';
+                           
+                        }else{    
                                 while($row = $risultatotopic->fetch_assoc())
                                 {               
                                     echo '<div class="tabheader_content">';
@@ -198,6 +203,7 @@ session_start();
                                        
                                 }
                             }
+                        }
                         
                     ?>
                 </div>
@@ -228,7 +234,10 @@ session_start();
                     echo 'The resources could not be displayed, please try again later.';
                 }
                 else
-                {           
+                {        
+                     if(mysqli_num_rows($risultatoresources) == 0){
+                       echo'<p>This user has not posted any resources yet</p>';
+                    }else{  
                         while($row = $risultatoresources->fetch_assoc())
                         {               
                             echo '<div class="tabheader_content">';
@@ -249,9 +258,10 @@ session_start();
                                 echo '</h2>';
                             echo '</div>';
                             echo'<div style="clear:both;"></div>';
-                               
+                           
                         }
                     }
+                }
 
                     ?>
                 </div>
@@ -274,16 +284,22 @@ session_start();
                     WHERE 
                         account.user ='" . $mydb->real_escape_string($_GET['id']) . "'
                     ORDER BY id DESC
-                    LIMIT 0,3"
+                    LIMIT 0,3" 
                     ;
     
                 $risultatotourneys = $mydb->query($querytourneys);
+                
                 if(!$risultatotourneys)
                 {
                     echo 'The resources could not be displayed, please try again later.';
                 }
                 else
-                {           
+                {      
+                    if(mysqli_num_rows($risultatotourneys) == 0){
+                       
+                            echo'<p>This user has not created a tournament yet</p>';
+                       
+                    }else{     
                         while($row = $risultatotourneys->fetch_assoc())
                         {               
                             echo '<div class="tabheader_content">';
@@ -302,7 +318,9 @@ session_start();
                                 }
                             echo '</div>';
                             echo'<div style="clear:both;"></div>';
+                            
                                
+                        }
                         }
                     }
                     ?>
@@ -310,22 +328,7 @@ session_start();
 
                 <div id="matchmaking" class="tabcontent">
                     <?php
-                        $querymatchmaking = "SELECT  
-                        matchamaking.Matchmakingid,
-                        topics.title AS topic_title,
-                        topics.txt,
-                        topics.date_post,
-                        account.user
-                    FROM
-                        topics
-                    LEFT JOIN
-                        account ON account.AccountId = topics.FkAccount 
-                    WHERE 
-                        account.user ='" . $mydb->real_escape_string($_GET['id']) . "'
-                    LIMIT 0,3"
-                    ;
-    
-            $risultatomatchmaking = $mydb->query($querymatchmaking);
+                       
                         echo'<h1>London</h1>
                         <p>England is my city.</p>';
                     ?>
@@ -336,13 +339,16 @@ session_start();
                 <?php
                     if($_SESSION['username'] == $mydb->real_escape_string($_GET['id'])){
                 ?>
-            <button class="btn"> <a id="out" href="scripts/logout.script.php">Log out </a></button>
+            <button class="btn"> <a id="out" href="scripts/logout.script.php">Log out</a></button>
                 <?php
                     }
                 ?>
         </div>
 
-        <?php }}?>
+        <?php }}
+        else{
+            echo'<p style="color:white;">You must be logged in to view accounts</p>';
+        }?>
     </div>
 
     <div class="footer">

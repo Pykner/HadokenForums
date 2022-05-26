@@ -3,7 +3,7 @@ session_start();
 ?>
 <html>
     <head>
-        <title>HadokenForums - Home</title>
+        <title>HadokenForums - resourceindex</title>
         <link rel = "icon" href = "../img/icon.jpg" type = "image/x-icon">
         <link rel="stylesheet" href="../css/homestyle.css?t=<?php echo round(microtime(true)*1000);?>">
         <link rel="stylesheet" href="../css/resources.css?t=<?php echo round(microtime(true)*1000);?>">
@@ -125,17 +125,17 @@ session_start();
         <div class="games">
 
             <div class="GGST">
-            <a href="../index.php"><img id="GGST" src="../img/logos/GGStrivelogo.png"></a>
+            <a href="gameresources.php?id=1"><img id="GGST" src="../img/logos/GGStrivelogo.png"></a>
             </div>
 
             <div class="SFV">
-            <a href="../index.php"><img id="SFV" src="../img/logos/SFVlogo.png"></a>
+            <a href="gameresources.php?id=2"><img id="SFV" src="../img/logos/SFVlogo.png"></a>
             </div>
 
             <div style="clear:both;"></div>
 
             <div class="T7">
-            <a href="../index.php"><img id="T7" src="../img/logos/T7logo.png"></a>
+            <a href="gameresources.php?id=3"><img id="T7" src="../img/logos/T7logo.png"></a>
             </div>
             
             
