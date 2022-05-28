@@ -142,7 +142,7 @@ session_start();
         </ul> 
     </div>
     <div class="whatisnewtxt">
-        <?php /*this shit's gonna get replaced by a query*/
+        <?php 
             $queryupdate = "SELECT *
             FROM webupdate LIMIT 0,1";
 
