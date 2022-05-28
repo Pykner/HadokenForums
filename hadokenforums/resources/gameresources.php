@@ -60,7 +60,7 @@ session_start();
                 <a href="javascript:void(0)" class="dropbtn"><i class="fa fa-book"></i>Resources</a>
                 <div class="dropdown-content">
                     <a href="resourceindex.php">See resources</a>
-                    <a href="#">Submit resource</a>
+                    <a href="newresource.php">Submit resource</a>
                 </div>
             </li>
             <li class="dropdown">
@@ -121,9 +121,8 @@ session_start();
 
     <div class="bodyinner">
         <?php
-            $query2 = "SELECT game.title, resources.Resourceid, resources.title AS resource_title, resources.valid, account.user
-                       FROM resources INNER JOIN game ON game.Gameid = resources.FkGameid
-                       LEFT JOIN account ON account.Accountid = resources.FkAccountid
+            $query2 = "SELECT game.title
+                       FROM game               
                        WHERE Gameid = ". $mydb->real_escape_string($_GET['id']);
             $risultato2 = $mydb->query($query2);
 
@@ -133,17 +132,14 @@ session_start();
             }
             else
             {
-                if(mysqli_num_rows($risultato2) == 0){
-                       
-                    echo'<h1 style="text-align: center;">There are no resources for this game yet.</h1>';
-               
-                }else{  
-                    //display category data
+                 
+                    
                     while($row = $risultato2->fetch_assoc())
                     {   
                         echo '<div class="forum_title">';
                         echo '<h2>Resources in ′' . $row['title'] . '′';
                         echo '</div>';
+                    }
                     
                         echo '<div class="forumposts">';
                             //prepare the table
@@ -158,8 +154,22 @@ session_start();
                                         <td class="rightpart"></td>
                                     </tr> '; 
                                 }
+
                                 
+                                $query3 = "SELECT game.title, resources.Resourceid, resources.title AS resource_title, resources.valid, account.user
+                                FROM resources INNER JOIN game ON game.Gameid = resources.FkGameid
+                                LEFT JOIN account ON account.Accountid = resources.FkAccountid
+                                WHERE Gameid = ". $mydb->real_escape_string($_GET['id']);
+                                $risultato3 = $mydb->query($query3);
+
+                                if(mysqli_num_rows($risultato3) == 0){
+                                    echo'</table>';
+                                    echo'<h1 style="text-align: center;">There are no resources for this game yet.</h1>';
+                            
+                                }else{ 
                                          
+                                    while($row = $risultato3->fetch_assoc())
+                                    {   
                                 echo '<tr>';
                                     echo '<td class="leftpart">';
                                         echo '<h3><a href="resource.php?id=' . $row['Resourceid'] . '">' . $row['resource_title'] . '</a><h3>';
@@ -173,10 +183,11 @@ session_start();
                                         }
                                     echo '</td>';
                                 echo '</tr>';
+                                    }
                             
                         }
                     }
-                }
+                
                 
             
             echo '</table>';

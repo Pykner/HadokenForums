@@ -60,7 +60,7 @@ session_start();
                 <a href="javascript:void(0)" class="dropbtn"><i class="fa fa-book"></i>Resources</a>
                 <div class="dropdown-content">
                     <a href="resources/resourceindex.php">See resources</a>
-                    <a href="#">Submit resource</a>
+                    <a href="resources/newresource.php">Submit resource</a>
                 </div>
             </li>
             <li class="dropdown">
@@ -143,12 +143,16 @@ session_start();
     </div>
     <div class="whatisnewtxt">
         <?php /*this shit's gonna get replaced by a query*/
+            $queryupdate = "SELECT *
+            FROM webupdate LIMIT 0,1";
+
+            $risultatoupdate = $mydb->query($queryupdate);
+
+            while($row = $risultatoupdate->fetch_assoc()){
+                echo'<h2>' . $row['title'] . '</h2>';
+                echo'<p>' . $row['txt'] . '</p>';
+                    }
         ?>
-                    <h2>13/05/2022 update</h2>
-                    <p>Added what is new text</p>
-                    <p>Added what is new navbar</p>
-                    <p>Fixed layout</p>
-                    <p>Added sex</p>
     </div>
 
             

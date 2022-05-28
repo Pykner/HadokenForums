@@ -61,7 +61,7 @@ session_start();
                 <a href="javascript:void(0)" class="dropbtn"><i class="fa fa-book"></i>Resources</a>
                 <div class="dropdown-content">
                     <a href="../resources/resourceindex.php">See resources</a>
-                    <a href="#">Submit resource</a>
+                    <a href="../resources/newresource.php">Submit resource</a>
                 </div>
             </li>
             <li class="dropdown">

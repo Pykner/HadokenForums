@@ -60,7 +60,7 @@ session_start();
                 <a href="javascript:void(0)" class="dropbtn"><i class="fa fa-book"></i>Resources</a>
                 <div class="dropdown-content">
                     <a href="resourceindex.php">See resources</a>
-                    <a href="#">Submit resource</a>
+                    <a href="newresource.php">Submit resource</a>
                 </div>
             </li>
             <li class="dropdown">
@@ -130,7 +130,7 @@ session_start();
 
             if(!$risultato2)
             {
-                echo 'The resources could not be displayed, please try again later.' . mysql_error();
+                echo 'The resources could not be displayed, please try again later.';
             }
             else
             {
@@ -149,7 +149,12 @@ session_start();
                         echo '<div class="resourceinfo">';
                             echo '<h2><a href="../account.php?id=' . $row['user'] .'">' . $row['user'] . '</a></h2>';
                             echo'<p>' .$row['txt'] . '</p>';
-                            echo'<h3><a href="'. $row['link'] .'">Resource link</a></h3>';
+
+                            if($row['link'] != NULL){
+                                echo'<h3><a href="'. $row['link'] .'">Resource link</a></h3>';
+                            }else{
+                                echo'<h3>No resource link provided</h3>';
+                            }
                         echo'</div>';
                                         echo'<div class="valid_check">';
                                             echo'<h2>'. $row['game_title'] .'</h2>';
