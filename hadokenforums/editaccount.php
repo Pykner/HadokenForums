@@ -51,7 +51,7 @@ session_start();
             <li class="dropdown">
                 <a href="javascript:void(0)" class="dropbtn"><i class="fa fa-trophy" ></i>Tournaments</a>
                 <div class="dropdown-content">
-                    <a href="#">Majors</a>
+                    <a href="tournaments/majorevents.php">Majors</a>
                     <a href="#">See tournaments</a>
                     <a href="#">Create tournament</a>
                     <a href="#">Manage tournaments</a>
@@ -139,11 +139,6 @@ session_start();
                             echo '<h2 id="prompt">Edit status</h2> 
                                 <textarea name="status_edit" required /></textarea><br>
 
-                                <h2 id="prompt">Edit email</h2>
-                                <input type="text" name="email_edit" required />
-
-                                <h2 id="prompt">Edit password</h2>
-                                <input type="text" name="password_edit" required /><br>
                                 <input class="btnForm" type="submit" value="Edit account" />
                             </form>';
             }
