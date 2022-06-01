@@ -6,7 +6,7 @@ session_start();
         <title>HadokenForums - posts</title>
         <link rel = "icon" href = "../img/icon.jpg" type = "image/x-icon">
         <link rel="stylesheet" href="../css/homestyle.css?t=<?php echo round(microtime(true)*1000);?>">
-        <link rel="stylesheet" href="../css/forums.css?t=<?php echo round(microtime(true)*1000);?>">
+        <link rel="stylesheet" href="../css/resources.css?t=<?php echo round(microtime(true)*1000);?>">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     </head>
 
@@ -61,8 +61,8 @@ session_start();
             <li class="dropdown">
                 <a href="javascript:void(0)" class="dropbtn"><i class="fa fa-trophy" ></i>Tournaments</a>
                 <div class="dropdown-content">
-                    <a href="../tournaments/majorevents.php">Majors</a>
-                    <a href="#">See tournaments</a>
+                    <a href="majorevents.php">Majors</a>
+                    <a href="tournamentlist.php">See tournaments</a>
                     <a href="#">Create tournament</a>
                     <a href="#">Manage tournaments</a>
                 </div>
@@ -134,7 +134,7 @@ session_start();
     <div class="tournament_container">
     <?php
             $query2 = "SELECT game.title AS game_title, tournament.id, tournament.title AS tournament_title, tournament.txt, tournament.major, tournament.online,
-                       tournament.data_inizio, tournament.data_fine, account.user, tournament.link
+                       tournament.data_inizio, tournament.region, tournament.address, tournament.data_fine, account.user, tournament.link
                        FROM tournament INNER JOIN game ON game.Gameid = tournament.FkGameid
                        LEFT JOIN account ON account.Accountid = tournament.FkAccountid
                        WHERE tournament.id = ". $mydb->real_escape_string($_GET['id']);
@@ -155,7 +155,7 @@ session_start();
                     while($row = $risultato2->fetch_assoc())
                     {   
                         echo '<div class="tournament_title">';
-                        echo '<h1>' . $row['tournament_title'] . '</h1>';
+                        echo '<h1 style="color: #F8B552;">' . $row['tournament_title'] . '</h1>';
                         echo '</div>';
                     
                         echo '<div class="resourceinfo">';
@@ -163,17 +163,34 @@ session_start();
                             echo'<p>' .$row['txt'] . '</p>';
 
                             if($row['link'] != NULL){
-                                echo'<h3><a href="'. $row['link'] .'">Resource link</a></h3>';
+                                echo'<h3><a href="'. $row['link'] .'">tournament link</a></h3>';
                             }else{
-                                echo'<h3>No resource link provided</h3>';
+                                echo'<h3>No tournament link provided</h3>';
                             }
                         echo'</div>';
                                         echo'<div class="valid_check">';
+                                        
                                             echo'<h2>'. $row['game_title'] .'</h2>';
-                                            if($row['valid'] == 0){
-                                                echo '<h2>Resource not validated yet</h2>';
+
+                                            echo'<h2>Start date: '. $row['data_inizio'] .'</h2>';
+
+                                            if($row['data_fine'] != NULL){
+                                                echo'<h2>End date: '. $row['data_fine'] .'</h2>';
+                                            }
+                                            
+                                            if($row['online'] == 1){
+                                                echo '<h2>ONLINE EVENT</h2>';
+                                                echo'<h2>Region: '. $row['region'] .'</h2>';
                                             }else{
-                                                echo '<h2>Valid resource</h2>';
+                                                if($row['address']!=NULL){
+                                                    echo'<h2>Address: '. $row['address'].'</h2>';
+                                                }else{
+                                                    echo'<h2>No address provided</h2>';
+                                                }
+                                            }
+                                            
+                                            if($row['major'] == 1){
+                                                echo '<h2>MAJOR EVENT</h2>';
                                             }
                                     echo '</div>';
 

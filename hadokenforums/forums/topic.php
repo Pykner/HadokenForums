@@ -77,7 +77,7 @@ session_start();
             <li class="dropdown">
                 <a href="javascript:void(0)" class="dropbtn"><i class="fa fa-gamepad"></i>Matchmaking</a>
                 <div class="dropdown-content">
-                    <a href="#">See matchmaking</a>
+                    <a href="../tournaments/tournamentlist.php">See matchmaking</a>
                     <a href="#">Create matchmaking</a>
                     <a href="#">Manage matchmaking</a>
                 </div>

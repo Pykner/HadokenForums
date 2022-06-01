@@ -33,6 +33,14 @@ h1{
     padding: 10px;
 }
 
+.tournament_container{
+    background-color: #282424;
+    margin-left: 2%;
+    margin-right: 2%;
+    margin-top: 20px;
+    padding: 10px;
+}
+
 .resource_title{
     color: white;
 }

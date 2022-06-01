@@ -52,7 +52,7 @@ session_start();
                 <a href="javascript:void(0)" class="dropbtn"><i class="fa fa-trophy" ></i>Tournaments</a>
                 <div class="dropdown-content">
                     <a href="majorevents.php">Majors</a>
-                    <a href="#">See tournaments</a>
+                    <a href="tournamentlist.php">See tournaments</a>
                     <a href="#">Create tournament</a>
                 </div>
             </li>
