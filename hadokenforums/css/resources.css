@@ -62,3 +62,10 @@ h1{
     text-align: center;
     color: white;
 }
+
+.tinfo{
+    width: 50%;
+    float: right;
+    text-align: center;
+    color: white;
+}

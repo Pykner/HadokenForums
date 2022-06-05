@@ -56,7 +56,7 @@ session_start();
                 <div class="dropdown-content">
                     <a href="tournaments/majorevents.php">Majors</a>
                     <a href="tournaments/tournamentlist.php">See tournaments</a>
-                    <a href="#">Create tournament</a>
+                    <a href="tournaments/newtournament.php">Create tournament</a>
                     <a href="#">Manage tournaments</a>
                 </div>
             </li>
@@ -339,6 +339,7 @@ session_start();
                 <?php
                     if($_SESSION['username'] == $mydb->real_escape_string($_GET['id'])){
                 ?>
+            <button class="btnform"> <a id="out" href="editaccount.php">Edit account</a></button>
             <button class="btn"> <a id="out" href="scripts/logout.script.php">Log out</a></button>
                 <?php
                     }

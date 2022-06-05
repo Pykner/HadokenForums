@@ -59,7 +59,7 @@ session_start();
                 <div class="dropdown-content">
                     <a href="../tournaments/majorevents.php">Majors</a>
                     <a href="../tournaments/tournamentlist.php">See tournaments</a>
-                    <a href="#">Create tournament</a>
+                    <a href="../tournaments/newtournament.php">Create tournament</a>
                     <a href="#">Manage tournaments</a>
                 </div>
             </li>

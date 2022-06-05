@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Creato il: Mag 28, 2022 alle 23:05
+-- Creato il: Giu 06, 2022 alle 00:57
 -- Versione del server: 10.4.22-MariaDB
 -- Versione PHP: 8.1.2
 
@@ -44,7 +44,7 @@ INSERT INTO `account` (`Accountid`, `user`, `hash`, `stat`, `email`, `pic`) VALU
 (1, 'Pykner', '$2y$10$fHcbP6AGEMTWRqaupaxg8.NRSOZ8OUlFQ5xbG8Fu7dnWmDAuPBlwS', 'Hello! i am an hadoken forums user.', 'emasonic2@gmail.com', 'img/profile/profilepic1.jpg'),
 (2, 'gamering69420', '$2y$10$UPBR8brRLIM.ugixYSQ4K.TmuY52FPZJNV/UwsebIfS5kFbfIjkXW', 'Hello! i am an hadoken forums user.', 'gamering69420@gmail.com', 'img/profile/profilepic1.jpg'),
 (3, 'Ky_main', '$2y$10$.hfO1RHqnarFNDi7rG2LheiMD3n2H0B9JyvRZZHhJxI2/yamPNngm', 'Hello! i am an hadoken forums user.', 'runupgrab@gmail.com', 'img/profile/profilepic1.jpg'),
-(4, 'Baiken_main', '$2y$10$.QWG.NZOoFrgsd7yEPMwZege93x4A6xgRMrgEj6w.s6VJUx2YVuWy', 'Hello! i am an hadoken forums user.', 'booba@booba.com', 'img/profile/profilepic2.jpg'),
+(4, 'Baiken_main', '$2y$10$.QWG.NZOoFrgsd7yEPMwZege93x4A6xgRMrgEj6w.s6VJUx2YVuWy', 'I like f.s into 2h', 'booba@booba.com', 'img/profile/profilepic2.jpg'),
 (5, 'jin_main', '$2y$10$EHmtV1Ihps2SObkZ5Y4X8u6won1V3b/4kKJ4dDXR7h8laBQq7.3oK', 'Hello! i am an hadoken forums user.', 'electric@mishima.com', 'img/profile/profilepic1.jpg');
 
 -- --------------------------------------------------------
@@ -200,15 +200,16 @@ CREATE TABLE `tournament` (
   `major` tinyint(1) DEFAULT NULL,
   `online` tinyint(1) DEFAULT NULL,
   `region` varchar(50) DEFAULT NULL,
-  `address` varchar(125) DEFAULT NULL
+  `address` varchar(125) DEFAULT NULL,
+  `FkGameid` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dump dei dati per la tabella `tournament`
 --
 
-INSERT INTO `tournament` (`id`, `title`, `link`, `txt`, `likes`, `data_inizio`, `data_fine`, `FkAccountid`, `major`, `online`, `region`, `address`) VALUES
-(1, 'HoHs', 'https://challonge.com/it/Hoesoncino', 'Gaming', 0, '2022-05-14', '2022-05-14', 1, 0, 0, 'Europe', 'Italy, Soncino, Via XXV aprile, 4');
+INSERT INTO `tournament` (`id`, `title`, `link`, `txt`, `likes`, `data_inizio`, `data_fine`, `FkAccountid`, `major`, `online`, `region`, `address`, `FkGameid`) VALUES
+(1, 'HoHs', 'https://challonge.com/it/Hoesoncino', 'Gaming', 0, '2022-05-14', '2022-05-14', 1, 0, 0, 'Europe', 'Italy, Soncino, Via XXV aprile, 4', 1);
 
 -- --------------------------------------------------------
 
@@ -287,7 +288,8 @@ ALTER TABLE `topics`
 --
 ALTER TABLE `tournament`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `FkAccountid` (`FkAccountid`);
+  ADD KEY `FkAccountid` (`FkAccountid`),
+  ADD KEY `FkGameid` (`FkGameid`);
 
 --
 -- Indici per le tabelle `webupdate`
@@ -382,6 +384,7 @@ ALTER TABLE `topics`
 -- Limiti per la tabella `tournament`
 --
 ALTER TABLE `tournament`
+  ADD CONSTRAINT `FkGameid` FOREIGN KEY (`FkGameid`) REFERENCES `game` (`Gameid`),
   ADD CONSTRAINT `tournament_ibfk_1` FOREIGN KEY (`FkAccountid`) REFERENCES `account` (`Accountid`);
 COMMIT;
 

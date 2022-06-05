@@ -3,7 +3,7 @@ session_start();
 ?>
 <html>
     <head>
-        <title>HadokenForums - posts</title>
+        <title>HadokenForums - Posts</title>
         <link rel = "icon" href = "../img/icon.jpg" type = "image/x-icon">
         <link rel="stylesheet" href="../css/homestyle.css?t=<?php echo round(microtime(true)*1000);?>">
         <link rel="stylesheet" href="../css/forums.css?t=<?php echo round(microtime(true)*1000);?>">
@@ -62,8 +62,8 @@ session_start();
                 <a href="javascript:void(0)" class="dropbtn"><i class="fa fa-trophy" ></i>Tournaments</a>
                 <div class="dropdown-content">
                     <a href="../tournaments/majorevents.php">Majors</a>
-                    <a href="#">See tournaments</a>
-                    <a href="#">Create tournament</a>
+                    <a href="../tournaments/tournamentlist.php">See tournaments</a>
+                    <a href="../tournaments/newtournament.php">Create tournament</a>
                     <a href="#">Manage tournaments</a>
                 </div>
             </li>

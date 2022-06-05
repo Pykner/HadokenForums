@@ -3,7 +3,7 @@ session_start();
 ?>
 <html>
     <head>
-        <title>HadokenForums - gameresources</title>
+        <title>HadokenForums - Majors</title>
         <link rel = "icon" href = "../img/icon.jpg" type = "image/x-icon">
         <link rel="stylesheet" href="../css/homestyle.css?t=<?php echo round(microtime(true)*1000);?>">
         <link rel="stylesheet" href="../css/forums.css?t=<?php echo round(microtime(true)*1000);?>">
@@ -53,7 +53,8 @@ session_start();
                 <div class="dropdown-content">
                     <a href="majorevents.php">Majors</a>
                     <a href="tournamentlist.php">See tournaments</a>
-                    <a href="#">Create tournament</a>
+                    <a href="newtournament.php">Create tournament</a>
+                    <a href="#">Manage tournaments</a>
                 </div>
             </li>
             <li class="dropdown">

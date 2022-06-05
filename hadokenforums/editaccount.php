@@ -4,9 +4,9 @@ session_start();
 <html>
     <head>
         <title>HadokenForums - Edit account</title>
-        <link rel = "icon" href = "../img/icon.jpg" type = "image/x-icon">
-        <link rel="stylesheet" href="../css/homestyle.css?t=<?php echo round(microtime(true)*1000);?>">
-        <link rel="stylesheet" href="../css/forums.css?t=<?php echo round(microtime(true)*1000);?>">
+        <link rel = "icon" href = "img/icon.jpg" type = "image/x-icon">
+        <link rel="stylesheet" href="css/homestyle.css?t=<?php echo round(microtime(true)*1000);?>">
+        <link rel="stylesheet" href="css/forums.css?t=<?php echo round(microtime(true)*1000);?>">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     </head>
 
@@ -53,7 +53,7 @@ session_start();
                 <div class="dropdown-content">
                     <a href="tournaments/majorevents.php">Majors</a>
                     <a href="tournaments/tournamentlist.php">See tournaments</a>
-                    <a href="#">Create tournament</a>
+                    <a href="tournaments/newtournament.php">Create tournament</a>
                     <a href="#">Manage tournaments</a>
                 </div>
             </li>
@@ -123,6 +123,10 @@ session_start();
     <div class="bodyinner">
         <div class="postform">
         <?php
+            $queryaccinfo = "SELECT stat,pic FROM account WHERE account.Accountid =" .$_SESSION['id'];
+
+            $risultatoaccinfo = $mydb->query($queryaccinfo);
+
             echo '<h1>Edit account</h1>';
             if(isset($_SESSION['username']) == false)
             {
@@ -131,20 +135,38 @@ session_start();
             }
             else
             {                
+                if(!$risultatoaccinfo)
+                {
+                    echo 'The form could not be displayed, please try again later.';
+                }
+                    else
+                    {
+                
+                    //display category data
+                    while($row = $risultatoaccinfo->fetch_assoc())
+                    {   
 
                             echo '<form method="post" action="scripts/editaccount.script.php?id= '. $_SESSION["id"] .'">
                                 <h2 id="prompt">Edit profile pic</h2>
-                                <input type="text" name="topic_subject" required />';  
+
+                                <input hidden type="radio" class="prfcheck1" name="prfcheck" value="img/profile/profilepic1.jpg" id="prfcheck1" '; if($row['pic'] == "img/profile/profilepic1.jpg"){echo'checked'; } echo' required/><label for="prfcheck1"></label>' ;
+                                echo'<input hidden type="radio" class="prfcheck2" name="prfcheck" value="img/profile/profilepic2.jpg" id="prfcheck2" '; if($row['pic'] == "img/profile/profilepic2.jpg"){echo'checked'; } echo' required/><label for="prfcheck2"></label>' ;
+                                echo'<input hidden type="radio" class="prfcheck3" name="prfcheck" value="img/profile/profilepic3.jpg" id="prfcheck3" '; if($row['pic'] == "img/profile/profilepic3.jpg"){echo'checked'; } echo' required/><label for="prfcheck3"></label>' ;
+                                echo'<input hidden type="radio" class="prfcheck4" name="prfcheck" value="img/profile/profilepic4.jpg" id="prfcheck4" '; if($row['pic'] == "img/profile/profilepic4.jpg"){echo'checked'; } echo' required/><label for="prfcheck4"></label>';
                                 
                             echo '<h2 id="prompt">Edit status</h2> 
-                                <textarea name="status_edit" required /></textarea><br>
+                                <textarea name="status_edit" required />'.$row['stat'].'</textarea><br>
 
                                 <input class="btnForm" type="submit" value="Edit account" />
                             </form>';
+                    }
+                }
             }
             
             
+            
 ?>
+
     </div>
     </div>
 

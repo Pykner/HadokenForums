@@ -296,3 +296,116 @@ margin-left: 1%;
 .icon-bar a:hover {
   background-color: #000;
 }
+
+
+input[type=checkbox] {
+  display:none;
+  }
+   
+  input#prfcheck1[type=radio] + label
+  {
+  background-image: url("../img/profile/profilepic1.jpg");
+  border-color: white;
+  border-style: solid;
+  background-size: 196px 196px;
+  max-width: 196px;
+    max-height: 196px;
+    min-height: 196px;
+    min-width: 196px;
+  display:inline-block;
+  
+  }
+
+  input#prfcheck1[type=radio]:checked + label
+  {
+  border-color: red;
+  border-style: solid;
+  background-size: 196px 196px;
+  max-width: 196px;
+    max-height: 196px;
+    min-height: 196px;
+    min-width: 196px;
+  display:inline-block;
+  
+  }
+
+  input#prfcheck2[type=radio] + label
+  {
+  background-image: url("../img/profile/profilepic2.jpg");
+  border-color: white;
+  border-style: solid;
+  background-size: 196px 196px;
+  max-width: 196px;
+    max-height: 196px;
+    min-height: 196px;
+    min-width: 196px;
+  display:inline-block;
+  
+  }
+
+  input#prfcheck2[type=radio]:checked + label
+  {
+  border-color: red;
+  border-style: solid;
+  background-size: 196px 196px;
+  max-width: 196px;
+    max-height: 196px;
+    min-height: 196px;
+    min-width: 196px;
+  display:inline-block;
+  
+  }
+
+  input#prfcheck3[type=radio] + label
+  {
+  background-image: url("../img/profile/profilepic3.jpg");
+  border-color: white;
+  border-style: solid;
+  background-size: 196px 196px;
+  max-width: 196px;
+    max-height: 196px;
+    min-height: 196px;
+    min-width: 196px;
+  display:inline-block;
+  
+  }
+
+  input#prfcheck3[type=radio]:checked + label
+  {
+  border-color: red;
+  border-style: solid;
+  background-size: 196px 196px;
+  max-width: 196px;
+    max-height: 196px;
+    min-height: 196px;
+    min-width: 196px;
+  display:inline-block;
+  
+  }
+
+  input#prfcheck4[type=radio] + label
+  {
+  background-image: url("../img/profile/profilepic4.jpg");
+  border-color: white;
+  border-style: solid;
+  background-size: 196px 196px;
+  max-width: 196px;
+    max-height: 196px;
+    min-height: 196px;
+    min-width: 196px;
+  display:inline-block;
+  
+  }
+
+  input#prfcheck4[type=radio]:checked + label
+  {
+  border-color: red;
+  border-style: solid;
+  background-size: 196px 196px;
+  max-width: 196px;
+    max-height: 196px;
+    min-height: 196px;
+    min-width: 196px;
+  display:inline-block;
+  
+  }

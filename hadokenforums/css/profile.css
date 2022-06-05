@@ -86,8 +86,21 @@ color: #F8B552;
 
 .tabheader_content{
   float: left;
+  width: 75%;
 }
 
 .tabheader_leftinfo{
   float: right;
+  width: 25%;
+}
+
+.btnForm {
+  width: fit-content;
+  background-color: #F8B552;
+  color: white;
+  text-decoration: none;
+  padding: 10px 10px;
+  cursor: pointer;
+  opacity: 0.9;
+  margin-top: 10px;
 }
